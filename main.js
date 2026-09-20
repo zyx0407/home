@@ -21,9 +21,11 @@
     var W = 0, H = 0, dpr = 1;
     var farStars = [], nearStars = [];
     var frame = 0, raf = null, running = false;
-    var meteors = [], meteorWait = 90;              // 进场约 1.5 秒就来第一颗
-    var METEOR_MAX = 4;                             // 同时在飞的上限
-    var METEOR_GAP_MIN = 240, METEOR_GAP_MAX = 700;  // 帧：约 4~12 秒一波
+    /* 流星：手机上也开，但密度减半（上限 4 颗、间隔拉长），省电；电脑上是主看点 */
+    var meteors = [], meteorWait = small ? 90 : 45;      // 进场约 0.75 秒（手机 1.5 秒）就来第一颗
+    var METEOR_MAX = small ? 4 : 8;                      // 同时在飞的上限
+    var METEOR_GAP_MIN = small ? 60 : 30;
+    var METEOR_GAP_MAX = small ? 200 : 100;              // 帧：电脑约 0.5~1.7 秒一波
     var dimP = 0;      // 0 = 门外最亮 → 1 = 屋内最暗
     var pushP = 0;     // 镜头推进进度（0→1）
 
@@ -132,7 +134,7 @@
         drawMeteor(light);
     }
 
-    /* ---- 流星：可同时飞好几颗，间隔约 4~12 秒，偶尔来一小阵 ---- */
+    /* ---- 流星：可同时飞好几颗，约 0.5~1.7 秒一波，常常一小阵一起来 ---- */
     function spawnMeteor() {
         if (meteors.length >= METEOR_MAX) return;
 
@@ -153,13 +155,15 @@
     }
 
     function drawMeteor(light) {
-        if (reduce || small) return;
+        if (reduce) return;
 
         /* 到点就放，偶尔一次放两颗（像一小阵流星雨） */
         if (meteors.length < METEOR_MAX) {
             meteorWait--;
             if (meteorWait <= 0) {
-                var n = Math.random() < 0.3 ? 2 : 1;
+                /* 一小阵：55% 两颗、12% 三颗，其余一颗 —— 随机才有"呼吸"感 */
+                var roll = Math.random();
+                var n = roll < 0.12 ? 3 : (roll < 0.55 ? 2 : 1);
                 for (var q = 0; q < n; q++) spawnMeteor();
                 meteorWait = METEOR_GAP_MIN + Math.random() * (METEOR_GAP_MAX - METEOR_GAP_MIN);
             }
@@ -447,26 +451,6 @@
         });
     }
 
-    /* ================= 两扇门：推门进星空 ================= */
-    function bindDoor() {
-        var doorStar = $('#door-star');
-        if (!doorStar) return;
-
-        doorStar.addEventListener('click', function (e) {
-            if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-            if (reduce) return;                       // 减少动效偏好 → 直接跳
-            e.preventDefault();
-            var href = doorStar.getAttribute('href');
-            gsap.set(wipe, { display: 'block', opacity: 1, clipPath: 'circle(0% at 50% 50%)', webkitClipPath: 'circle(0% at 50% 50%)' });
-            gsap.to(wipe, {
-                clipPath: 'circle(150% at 50% 50%)',
-                webkitClipPath: 'circle(150% at 50% 50%)',
-                duration: 1.05, ease: 'power3.inOut',
-                onComplete: function () { window.location.href = href; }
-            });
-        });
-    }
-
     /* ================= 启动 ================= */
     function init() {
         if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -485,7 +469,6 @@
 
         buildRail();
         buildObservers();
-        bindDoor();
         resizeCanvas();
         startSky();
 
