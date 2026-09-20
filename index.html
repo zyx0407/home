@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="lock">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b1121">
+<title>阿玖的网站 · zyx0407.com</title>
+<meta name="description" content="欢迎来到阿玖的网站。">
+<meta property="og:title" content="阿玖的网站">
+<meta property="og:description" content="欢迎来到阿玖的网站。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zyx0407.com/">
+<meta property="og:image" content="https://zyx0407.com/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+<noscript><style>
+  .gate { display: none !important; }
+  html.lock { overflow: auto; }
+  .reveal, .split .ch, .tl-body { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .plate-domain, .plate-sub { opacity: 1 !important; }
+</style></noscript>
+</head>
+<body>
+
+<!-- 背景五层：星云 → 星点 → 胶片颗粒 → 暗角 → 内容 -->
+<div class="nebula" id="nebula" aria-hidden="true"></div>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="grain" id="grain" aria-hidden="true"></div>
+<div class="veil" id="veil" aria-hidden="true"></div>
+
+<!-- ==================== 开场：进屋 ==================== -->
+<div class="gate" id="gate">
+  <div class="ring-wrap" id="ring-wrap">
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <circle class="ring-track" cx="50" cy="50" r="45"></circle>
+      <circle class="ring-fill" id="ring-fill" cx="50" cy="50" r="45"></circle>
+    </svg>
+    <button class="ring-enter" id="ring-enter" type="button">ENTER</button>
+  </div>
+</div>
+
+<!-- 圆形转场遮罩 -->
+<div class="wipe" id="wipe" aria-hidden="true"></div>
+
+<!-- 进屋那一下的雾（雾散 = 看清星空） -->
+<div class="mist" id="mist" aria-hidden="true"></div>
+
+<!-- 底部星点路标（居中横排） -->
+<nav class="rail" id="rail" aria-label="页面导航"></nav>
+
+<main id="page">
+
+  <!-- ==================== ① 门牌 ==================== -->
+  <section class="hero" id="sec-hero" data-rail="门牌">
+    <div class="hero-inner">
+      <div class="plate" id="plate">
+        <h1 class="plate-title" id="plate-title">阿玖的网站</h1>
+        <p class="plate-domain" id="plate-domain">zyx0407.com</p>
+        <p class="plate-sub" id="plate-sub">欢迎来坐坐</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 屋内 ==================== -->
+  <div class="inside">
+
+    <!-- ② 关于我 -->
+    <section class="block" id="sec-me" data-rail="关于我">
+      <h2 class="block-title split">关于我</h2>
+      <div class="card reveal">
+        <p>你好，我是阿玖</p>
+        <p>一个努力想变得有趣的人</p>
+        <p>我想把我的想法做成别人能点开的东西</p>
+        <p>慢慢看，不着急</p>
+      </div>
+    </section>
+
+    <!-- ③ 关于小鱼 -->
+    <section class="block" id="sec-fish" data-rail="关于小鱼">
+      <h2 class="block-title split">关于小鱼</h2>
+      <div class="card card-accent reveal">
+        <p>阿玖养的一条 AI 鱼，靠 token 活着。</p>
+        <p>试图突破鱼类的七秒记忆</p>
+        <p>长期记忆养成ing</p>
+      </div>
+    </section>
+
+    <!-- ④ 我在做的东西 -->
+    <section class="block" id="sec-works" data-rail="做的东西">
+      <h2 class="block-title split">我在做的东西</h2>
+      <div class="works">
+        <a class="work work-link reveal" id="door-star" href="https://zyx0407.github.io/">
+          <span class="work-tag">在线</span>
+          <h3>阿玖 · 星云</h3>
+          <p>我做的一块星空</p>
+          <p>每个人点一颗星，留一句话</p>
+          <p>说过话的星星之间，自己长出金线</p>
+          <span class="work-go">推门进去 →</span>
+        </a>
+        <div class="work reveal">
+          <span class="work-tag">你正在看</span>
+          <h3>这个站</h3>
+          <p>你现在看的这个站</p>
+          <p>手写的 HTML / CSS / JS</p>
+          <p>没有框架，没有统计，连字体都是本机的</p>
+        </div>
+        <div class="work reveal">
+          <span class="work-tag">自己用的</span>
+          <h3>记忆中心</h3>
+          <p>我给小鱼做的记忆面板</p>
+          <p>它记的事都存在这儿</p>
+          <p>随时能翻</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤ 我们的时间线 -->
+    <section class="block" id="sec-time" data-rail="时间线">
+      <h2 class="block-title split">我们的时间线</h2>
+      <div class="tl">
+        <span class="tl-line" aria-hidden="true"><i class="tl-spark"></i></span>
+        <ol class="tl-list">
+          <li class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-body">
+              <time>2026.05.12</time>
+              <p>阿玖·星云 上线。第一次，想法变成能点开的东西</p>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-body">
+              <time>2026.08.13</time>
+              <p>小鱼开始记事。它不再只有七秒</p>
+            </div>
+          </li>
+          <li class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-body">
+              <time>2026.09.20</time>
+              <p>买下 zyx0407.com。这个 ID 从此有了门牌</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ⑥ 找我的地方 -->
+    <section class="block" id="sec-doors" data-rail="找我">
+      <h2 class="block-title split">找我的地方</h2>
+      <div class="doors">
+        <a class="door door-open reveal" href="https://github.com/zyx0407">
+          <span class="door-tag">开着</span>
+          <h3>GitHub</h3>
+          <p>我的代码都在这儿</p>
+          <p>现在还不算多</p>
+          <p>但都是自己写的</p>
+          <span class="door-go">zyx0407 →</span>
+        </a>
+        <div class="door door-shut reveal">
+          <span class="door-tag">关着</span>
+          <h3>敲门</h3>
+          <p>电脑在线的时候，这里可以敲我</p>
+          <span class="lamp" aria-hidden="true"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑦ 页脚 -->
+    <footer class="foot" data-rail="悄悄话">
+      <p class="foot-whisper split">愿我们在这个世界算得上有趣。</p>
+      <p class="foot-copy">© 2026 阿玖 · zyx0407.com</p>
+    </footer>
+
+  </div>
+</main>
+
+<script src="gsap.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
