@@ -27,7 +27,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 html.lock { overflow: hidden; }
 
 body {
@@ -303,6 +303,12 @@ body {
     justify-content: center;
     z-index: 4;
     pointer-events: none;
+}
+
+/* 手机浏览器的地址栏会吃高度：用 svh（最小视口高度）保证门牌永远完整可见 */
+@supports (height: 100svh) {
+    .hero-inner { height: 100svh; }
+    .gate { min-height: 100svh; }
 }
 
 .plate {
@@ -647,7 +653,7 @@ body {
    ⑥ 页脚
    ================================================================ */
 .foot {
-    padding: clamp(5rem, 12vh, 9rem) 1.5rem clamp(4.5rem, 10vh, 7rem);
+    padding: clamp(5rem, 12vh, 9rem) 1.5rem calc(clamp(4.5rem, 10vh, 7rem) + env(safe-area-inset-bottom, 0px));
     border-top: 1px solid var(--line-soft);
     text-align: center;
 }
@@ -681,8 +687,6 @@ body {
    ================================================================ */
 @media (max-width: 768px), (pointer: coarse) {
     .hero { height: 150vh; }
-    .rail { gap: 11px; bottom: 16px; }
-    .rail-dot::after { display: none; }
     .doors,
     .works { grid-template-columns: 1fr; }
     .works > .work:last-child:nth-child(odd) { width: auto; }
@@ -700,6 +704,66 @@ body {
     .tl { padding-left: 1.9rem; }
     .tl-dot { left: calc(-1.9rem + 1px); }
     .card, .door { backdrop-filter: none; -webkit-backdrop-filter: none; }
+
+    /* 玻璃层的模糊很吃手机性能，卡片只留底色和描边 */
+    .work, .door, .card { box-shadow: 0 6px 24px rgba(3, 8, 20, .34); }
+
+    /* 小字稍微放大一点，手机上更好读 */
+    .work-tag, .door-tag { font-size: .74rem; }
+    .work p, .door p { font-size: .96rem; }
+    .tl-body p { font-size: .96rem; }
+}
+
+/* ================================================================
+   触摸设备：把星点路标的"可点面积"做大
+   6px 的小圆点在手机上根本戳不准，改成 36px 的透明按钮，
+   圆点用 ::before 画出来，视觉上不变、手指好点
+   ================================================================ */
+@media (pointer: coarse) {
+    .rail {
+        gap: 0;
+        padding: 3px 10px;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    }
+    /* 触摸没有"悬停"，名字标签不出现 */
+    .rail-dot::after { display: none; }
+    .rail-dot {
+        width: 36px;
+        height: 36px;
+        border: 0;
+        background: transparent;
+    }
+    .rail-dot::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 9px;
+        height: 9px;
+        margin: -4.5px 0 0 -4.5px;
+        border: 1px solid rgba(255, 255, 255, .22);
+        border-radius: 50%;
+        transition: background .4s var(--ease), border-color .4s var(--ease), box-shadow .4s var(--ease);
+    }
+    .rail-dot.past::before {
+        background: rgba(127, 178, 224, .30);
+        border-color: rgba(127, 178, 224, .45);
+    }
+    .rail-dot.on::before {
+        background: var(--accent);
+        border-color: var(--accent);
+        box-shadow: 0 0 12px var(--accent-soft);
+    }
+}
+
+/* 触摸设备没有"悬停"，把 hover 效果收掉，免得点完一直卡着 */
+@media (hover: none) {
+    .work-link:hover, .door-open:hover {
+        transform: none;
+        background: var(--bg-card);
+        border-color: var(--glass-line);
+        box-shadow: var(--glass-shadow);
+    }
 }
 
 /* ================================================================
