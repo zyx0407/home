@@ -398,7 +398,10 @@ body.ready .dock{opacity:1}
   .rock-box{width:clamp(360px,92vw,520px)}
 }
 
-/* 触摸设备：不收 hover 效果（本阶段没有 hover 依赖，留个空位备忘） */
+/* 触摸设备：不参与 hover 效果。
+   （1.0 起 .cue 有了 :hover，所以下面那条 hover 规则已改由
+    @media (hover:hover) and (pointer:fine) 保护 —— 触摸端根本不套用，
+    避免点一下 hover 就粘住不放 / 长按选字时颜色乱跳。见 issue #1） */
 @media (hover:none){
   .cue{opacity:.9}
 }
@@ -794,7 +797,11 @@ html[class*="shot-"] .mote{transition:none}
   background:none;border:0;padding:6px 10px;cursor:pointer;
   transition:color .35s var(--ease),letter-spacing .35s var(--ease);
 }
-.cue:hover{color:var(--accent);letter-spacing:.14em}
+/* 只在真能 hover 的设备上生效：触摸端不套用这条规则，
+   否则点一下 hover 就会粘住不放、长按选字时颜色还会乱跳（访客 menggou1 报的 issue #1）。 */
+@media (hover:hover) and (pointer:fine){
+  .cue:hover{color:var(--accent);letter-spacing:.14em}
+}
 .cue:focus-visible{outline:1px solid var(--accent-soft);outline-offset:4px;color:var(--text)}
 
 /* ② 准星的可点提示 */
