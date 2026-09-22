@@ -166,7 +166,10 @@ body.ready .dock{opacity:1}
   color:var(--accent);text-decoration:none;
   border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .3s var(--ease);
 }
-.work-link a:hover{border-bottom-color:var(--accent)}
+/* 只在真能 hover 的设备上生效（触摸端不套用 —— 否则点一下 hover 会粘住不放，见 issue #1） */
+@media (hover:hover) and (pointer:fine){
+  .work-link a:hover{border-bottom-color:var(--accent)}
+}
 
 /* ---------- 页面彩蛋：整页扫描（仅桌面端） ----------
    规则：准星带扫描圆 → 圆内样本进度 0→100% → 满了才显形（闪光）→ 点一下进样本柜。
@@ -269,7 +272,10 @@ body.ready .dock{opacity:1}
   transition:color .3s var(--ease),border-color .3s var(--ease);
 }
 .bag-btn[hidden]{display:none}
-.bag-btn:hover{color:var(--text);border-color:var(--accent)}
+/* 只在真能 hover 的设备上生效（触摸端不套用，见 issue #1） */
+@media (hover:hover) and (pointer:fine){
+  .bag-btn:hover{color:var(--text);border-color:var(--accent)}
+}
 .bag-btn b{color:var(--accent);font-weight:400}
 
 .bag-panel{
@@ -337,7 +343,10 @@ body.ready .dock{opacity:1}
   font-size:1.1rem;letter-spacing:.1em;
 }
 .door p{margin:0;color:var(--dim)}
-.door-open:hover{border-color:var(--accent);background:rgba(79,227,208,.045)}
+/* 只在真能 hover 的设备上生效（触摸端不套用，见 issue #1） */
+@media (hover:hover) and (pointer:fine){
+  .door-open:hover{border-color:var(--accent);background:rgba(79,227,208,.045)}
+}
 .door-shut .lamp{
   position:absolute;right:24px;top:24px;width:8px;height:8px;border-radius:50%;
   background:var(--warm);box-shadow:0 0 14px 4px rgba(255,217,160,.32);
