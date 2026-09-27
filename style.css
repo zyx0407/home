@@ -1,0 +1,159 @@
+
+  /* ── 白天：暖纸 paper（降亮度 + 不用纯黑，防顶眼） ─────────────── */
+  :root{
+    color-scheme:only light;
+    --bg:#efeee9;
+    --card:#f8f7f3;
+    --ink:#1c1d1f;
+    --muted:#7e807c;
+    --line:rgba(28,29,31,.11);
+    --line-strong:rgba(28,29,31,.22);
+    --chip:rgba(28,29,31,.15);
+    --hover:rgba(28,29,31,.035);
+    --amber:#a8541f;
+    --amber-soft:rgba(168,84,31,.35);
+    --pad:clamp(20px,5vw,72px);
+    --max:1160px;
+    --mono:Consolas,"Cascadia Mono",ui-monospace,monospace;
+  }
+  /* ── 深夜：深色展厅（来自 C 版） ─────────────── */
+  html[data-theme="night"]{
+    color-scheme:only dark;
+    --bg:#0e0f11;
+    --card:#17191c;
+    --ink:#eceef1;
+    --muted:#8a9099;
+    --line:rgba(255,255,255,.10);
+    --line-strong:rgba(255,255,255,.20);
+    --chip:rgba(255,255,255,.12);
+    --hover:rgba(255,255,255,.045);
+    --amber:#e0a458;
+    --amber-soft:rgba(224,164,88,.35);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI","Microsoft YaHei UI","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+
+  .top{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+    padding:34px 0 0;font-size:13.5px;letter-spacing:.06em;
+  }
+  .who{display:flex;align-items:baseline;gap:10px}
+  .who b{font-weight:600;letter-spacing:.08em}
+  .who span{color:var(--muted);font-family:var(--mono);font-size:12.5px}
+  .tools{display:flex;align-items:center;gap:18px}
+  .top .gh{color:var(--muted);border-bottom:1px solid transparent;transition:color .25s,border-color .25s}
+  .top .gh:hover{color:var(--amber);border-color:var(--amber)}
+
+  /* 日 / 夜 开关（一枚圆钮，图标在太阳 / 月亮之间切换） */
+  .theme{display:inline-flex;align-items:center}
+  .theme button{
+    appearance:none;display:grid;place-items:center;width:30px;height:30px;padding:0;
+    border:1px solid var(--chip);border-radius:50%;background:none;
+    color:var(--ink);opacity:.78;cursor:pointer;
+    transition:color .25s,border-color .25s,opacity .25s,background-color .25s;
+  }
+  .theme button:hover{color:var(--amber);border-color:var(--line-strong);opacity:1;background:var(--hover)}
+  html[data-theme="night"] .theme button{color:var(--amber);opacity:.95}
+  /* 两个图标叠在同一格里，按主题淡入淡出地换 */
+  .theme svg{grid-area:1/1;transition:opacity .3s ease,transform .35s cubic-bezier(.22,.61,.36,1)}
+  .theme .ico-moon{opacity:0;transform:rotate(-32deg) scale(.86)}
+  html[data-theme="night"] .theme .ico-sun{opacity:0;transform:rotate(32deg) scale(.86)}
+  html[data-theme="night"] .theme .ico-moon{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.theme svg{transition:none}}
+
+  /* 日 / 夜 切换：直接换、不做过渡（他 2026-09-26 定；页面其它动效照旧保留） */
+
+  .hero{padding:clamp(60px,12vh,140px) 0 clamp(52px,9vh,110px)}
+  .kicker{
+    font-family:var(--mono);font-size:12.5px;color:var(--muted);
+    letter-spacing:.16em;text-transform:uppercase;margin:0 0 26px;
+  }
+  h1{margin:0;font-weight:600;letter-spacing:.005em;font-size:clamp(30px,5.4vw,60px);line-height:1.24;max-width:20em}
+  h1 em{font-style:normal;position:relative;white-space:nowrap}
+  h1 em::after{
+    content:"";position:absolute;left:0;right:0;bottom:.06em;height:1px;background:var(--amber);opacity:.7;
+    transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.22,.61,.36,1) .35s;
+  }
+  .in h1 em::after{transform:scaleX(1)}
+  .sub{margin:28px 0 0;max-width:34em;color:var(--muted);font-size:clamp(14.5px,1.35vw,17px);line-height:1.85}
+
+  .list-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding-bottom:14px;border-bottom:1px solid var(--line-strong);
+    font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;
+  }
+  .item{
+    display:grid;grid-template-columns:56px 1fr auto;gap:clamp(12px,3vw,34px);align-items:baseline;
+    padding:clamp(22px,3.4vw,34px) 0;border-bottom:1px solid var(--line);position:relative;
+  }
+  .item::before{
+    content:"";position:absolute;left:calc(var(--pad) * -1);right:calc(var(--pad) * -1);top:0;bottom:0;
+    background:linear-gradient(90deg,var(--hover),transparent);
+    opacity:0;transition:opacity .35s;
+    pointer-events:none;   /* 关键：这层盖在整行上，不加就会把行内链接/按钮的点击吃掉 */
+  }
+  .item:hover::before{opacity:1}
+  .no{font-family:var(--mono);font-size:12.5px;color:var(--amber);letter-spacing:.1em;padding-top:.45em}
+  .item h2{
+    margin:0;font-size:clamp(17px,2vw,21px);font-weight:600;letter-spacing:.01em;
+    display:inline-flex;align-items:baseline;gap:12px;
+    transition:transform .35s cubic-bezier(.22,.61,.36,1);
+  }
+  .item:hover h2{transform:translateX(5px)}
+  .note{margin:9px 0 0;color:var(--muted);font-size:14.5px;max-width:34em}
+  .tags{margin:13px 0 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .chip{
+    border:1px solid var(--chip);border-radius:999px;padding:2px 9px;
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--muted);
+  }
+  .year{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:.45em;text-align:right;white-space:nowrap}
+  .year a{color:var(--amber);border-bottom:1px solid var(--amber-soft)}
+  .year a:hover{border-color:var(--amber)}
+
+  footer{
+    padding:clamp(52px,8vh,100px) 0 52px;display:flex;flex-wrap:wrap;gap:16px 26px;
+    justify-content:space-between;align-items:baseline;font-size:13px;color:var(--muted);
+  }
+  footer .sig{font-family:var(--mono);letter-spacing:.08em}
+  footer a{border-bottom:1px solid var(--line-strong)}
+  footer a:hover{color:var(--amber)}
+
+  .rv{opacity:0;transform:translateY(14px)}
+  .in .rv{opacity:1;transform:none;transition:opacity .8s ease,transform .8s cubic-bezier(.22,.61,.36,1)}
+  .in .rv:nth-of-type(2){transition-delay:.06s}
+  .in .rv:nth-of-type(3){transition-delay:.12s}
+  html[data-nofade] .rv,html[data-nofade] .in .rv{opacity:1;transform:none;transition:none}
+  html[data-nofade] h1 em::after{transform:scaleX(1);transition:none}
+  @media (prefers-reduced-motion:reduce){
+    .rv,.in .rv{opacity:1;transform:none;transition:none}
+    h1 em::after{transform:scaleX(1);transition:none}
+    body{transition:none}
+  }
+  @media (max-width:640px){
+    .item{grid-template-columns:38px 1fr}
+    .year{grid-column:2;text-align:left;padding-top:6px}
+    .top{flex-direction:column;align-items:flex-start;gap:12px}
+  }
+
+  /* ── 作品详情页（由 build.mjs 生成的 work\*.html 用） ── */
+  .kicker a.back{color:var(--amber);border-bottom:1px solid var(--amber-soft)}
+  .kicker a.back:hover{border-color:var(--amber)}
+  .detail{max-width:40em;margin:clamp(10px,2vh,30px) 0 clamp(40px,8vh,90px)}
+  .detail p{margin:0 0 1.15em;line-height:1.95}
+  .detail p.empty{color:var(--muted);font-size:14.5px}
+  .tags .go{color:var(--amber);border-bottom:1px solid var(--amber-soft);font-family:var(--mono);font-size:12.5px}
+  .tags .go:hover{border-color:var(--amber)}
+
+  /* ── 副页统一度量（个人 / 作品 / 邮箱 / 详情页共用这一套，别再各写各的） ── */
+  .subpage{padding:clamp(46px,9vh,110px) 0 clamp(30px,5vh,60px)}
+  .page-kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 10px}
+  .subpage h1{font-size:clamp(26px,4.2vw,44px);line-height:1.3;margin:0 0 20px;max-width:none;letter-spacing:.01em}
+  .top a.back{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;color:var(--muted)}
+  .top a.back:hover{color:var(--amber)}
