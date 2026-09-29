@@ -89,7 +89,7 @@
     if ((el = q('#works'))) {
       el.innerHTML = works.length
         ? works.map(workHTML).join('')
-        : '<p class="empty">清单还在整理中 —— 可以在编辑模式（?edit=1）里加作品。</p>';
+        : '<p class="empty">小鱼：清单还在整理中 —— 可以在编辑模式（?edit=1）里加作品。</p>';
     }
 
     /* 页脚 */

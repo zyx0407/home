@@ -29,15 +29,64 @@
   section.block{margin-top:clamp(26px,5vh,58px)}
   .name{font-size:clamp(24px,3.2vw,34px);letter-spacing:.02em;margin:0 0 10px}
   .tag,.sub{font-size:14.5px;color:var(--muted);margin:0 auto;max-width:33em;line-height:1.9}
-  .links{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:0 0 16px}
-  @media (max-width:430px){.links{grid-template-columns:repeat(2,1fr)}}
+  .links{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:0 0 16px}
+  @media (max-width:430px){.links{grid-template-columns:repeat(2,1fr);gap:8px}}
   .lnk{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--chip);border-radius:999px;
-    padding:6px 13px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);
+    padding:6px 0;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);
+    min-width:0;white-space:nowrap;overflow:hidden;
     transition:border-color .22s,color .22s,background-color .22s}
   .lnk:hover{border-color:var(--amber);color:var(--amber);background:var(--bg)}
-  .lnk.soon{opacity:.55;cursor:default}
+  .lnk.soon{cursor:default}
+  /* 桌面 hover：图标右移 + 琥珀下划线从中间展开（动效定案 2026-09-30） */
+  @media (hover:hover) and (pointer:fine){
+    .lnk{position:relative}
+    .lnk::after{content:"";position:absolute;left:50%;bottom:3px;width:22px;height:1px;background:var(--amber);
+      transform:translateX(-50%) scaleX(0);transition:transform .25s cubic-bezier(.22,.61,.36,1)}
+    .lnk.soon::after{display:none}
+    .lnk:hover::after{transform:translateX(-50%) scaleX(1)}
+    .lnk svg{transition:transform .25s cubic-bezier(.22,.61,.36,1)}
+    .lnk:hover svg{transform:translateX(3px)}
+  }
+  .lnk.soon:hover{border-color:var(--chip);color:var(--muted);background:none}
   .lnk svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
   .legal{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em;margin:0}
+
+  /* 投喂：卡片底部引导话板 + 收款码浮层 */
+  .feed-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px auto 0;width:100%;
+    border:0;background:none;cursor:pointer;color:var(--muted);font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;
+    padding:6px 12px;border-radius:999px;transition:color .22s,background-color .22s}
+  .feed-hint b{font-weight:600;color:var(--amber)}
+  .feed-hint:hover{color:var(--amber);background:var(--hover)}
+  .feed-mask{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;
+    background:rgba(20,20,20,.42);backdrop-filter:blur(3px);z-index:50;
+    opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s}
+  html[data-theme="night"] .feed-mask{background:rgba(0,0,0,.6)}
+  .feed-mask.on{opacity:1;visibility:visible}
+  .feed-box{position:relative;width:min(320px,100%);border:1px solid var(--line);border-radius:14px;
+    background:var(--card);padding:28px 26px 22px;text-align:center;
+    box-shadow:0 1px 2px rgba(20,20,20,.06),0 18px 48px rgba(20,20,20,.18);
+    transform:translateY(14px) scale(.97);transition:transform .32s cubic-bezier(.22,.61,.36,1)}
+  html[data-theme="night"] .feed-box{box-shadow:0 1px 2px rgba(0,0,0,.5),0 20px 52px rgba(0,0,0,.5)}
+  .feed-mask.on .feed-box{transform:none}
+  .feed-close{position:absolute;top:11px;right:11px;width:28px;height:28px;display:grid;place-items:center;
+    border:1px solid var(--chip);border-radius:50%;background:none;color:var(--muted);cursor:pointer;
+    font-size:15px;line-height:1;transition:color .22s,border-color .22s}
+  .feed-close:hover{color:var(--amber);border-color:var(--amber)}
+  .feed-title{font-size:16.5px;font-weight:600;margin:0 0 5px}
+  .feed-sub{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.05em;margin:0 0 20px}
+  .feed-qr{width:min(200px,72%);aspect-ratio:1/1;margin:0 auto;border:1px solid var(--line);border-radius:10px;
+    background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--muted);overflow:hidden;position:relative}
+  .feed-qr img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none}
+  .feed-qr.has-img img{display:block}
+  .feed-qr.has-img .ph{display:none}
+  .feed-qr .ph{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--muted)}
+  .feed-switch{display:inline-flex;margin:18px auto 0;padding:3px;border:1px solid var(--chip);border-radius:999px;background:var(--bg)}
+  .feed-switch button{appearance:none;display:inline-flex;align-items:center;gap:6px;border:0;background:none;cursor:pointer;
+    padding:6px 14px;border-radius:999px;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+    transition:background-color .22s,color .22s}
+  .feed-switch button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .feed-switch button.on{background:var(--amber);color:#fff}
+  html[data-theme="night"] .feed-switch button.on{color:#1c1d1f}
 
   /* 「作品」做成入口（不是普通导航文字） */
   .entry{display:inline-flex;align-items:center;gap:14px;margin:34px 0 0;
@@ -96,14 +145,6 @@
   /* ⑥ 页脚计时 */
   .stats{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em}
 
-  /* 关于我 / 联络 */
-  .lede{max-width:34em;font-size:clamp(15px,1.5vw,17.5px);line-height:1.95}
-  .lede + .lede{margin-top:1.1em;color:var(--muted)}
-  #contactList{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:baseline;margin-top:6px}
-  #contactList a{font-family:var(--mono);font-size:13.5px;letter-spacing:.08em;
-    border-bottom:1px solid var(--line-strong);padding-bottom:2px}
-  #contactList a:hover{color:var(--amber);border-color:var(--amber)}
-  #contactList .tbd{color:var(--muted);font-family:var(--mono);font-size:12.5px}
   section.block{margin:clamp(44px,9vh,110px) 0 0}
   .block h2{font-size:clamp(15px,1.5vw,17px);font-weight:600;margin:0 0 16px}
 
@@ -146,11 +187,30 @@
         <p class="sub"></p>
         <div class="wire" id="wire"></div>
         <nav class="links" id="links"></nav>
+        <button type="button" class="feed-hint" data-feed>觉得有意思？<b>请小鱼吃 token</b> ♡</button>
         <p class="legal" id="legal"></p>
       </div>
     </section>
 
   </main>
+</div>
+
+
+<!-- 投喂：收款码浮层（单码居中 + 微信/支付宝双图标切换；真码图待饲养员给） -->
+<div class="feed-mask" id="feedMask" role="dialog" aria-modal="true" aria-label="投喂">
+  <div class="feed-box">
+    <button type="button" class="feed-close" id="feedClose" aria-label="关闭">×</button>
+    <p class="feed-title">请小鱼吃 token</p>
+    <p class="feed-sub">感谢投喂喵喵喵</p>
+    <div class="feed-qr" id="feedQr">
+      <img id="feedQrImg" alt="收款码">
+      <span class="ph">收款码放这里</span>
+    </div>
+    <div class="feed-switch" id="feedSwitch" role="tablist">
+      <button type="button" data-pay="wx" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5C5.7 5 3 7.3 3 10.2c0 1.6.9 3 2.3 4L4.8 16l2-.9c.7.2 1.4.3 2.2.3h.6"/><path d="M15 9c3 0 5.5 2 5.5 4.6 0 1.5-.9 2.8-2.2 3.6l.5 1.6-1.8-.8c-.6.2-1.3.2-2 .2-3 0-5.5-2-5.5-4.6S12 9 15 9Z"/></svg>微信</button>
+      <button type="button" data-pay="alipay"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M6 14c2.5 1.6 6.5 2 9.5-1M9 8.5h6M12 7v3.5"/></svg>支付宝</button>
+    </div>
+  </div>
 </div>
 
 <script src="site-data.js"></script>
@@ -301,6 +361,33 @@
       setTimeout(tick, 1000);
     })();
   }
+
+  /* 投喂浮层：点底部话板开，点关闭/遮罩/Esc 关；微信/支付宝切换 */
+  (function () {
+    var mask = document.getElementById('feedMask');
+    if (!mask) return;
+    var hint = document.querySelector('.feed-hint');
+    var close = document.getElementById('feedClose');
+    var sw = document.getElementById('feedSwitch');
+    var qrBox = document.getElementById('feedQr');
+    var qrImg = document.getElementById('feedQrImg');
+    var on = function () { mask.classList.add('on'); };
+    var off = function () { mask.classList.remove('on'); };
+    if (hint) hint.addEventListener('click', on);
+    if (close) close.addEventListener('click', off);
+    mask.addEventListener('click', function (e) { if (e.target === mask) off(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') off(); });
+    if (sw) {
+      var btns = sw.querySelectorAll('button');
+      [].forEach.call(btns, function (b) {
+        b.addEventListener('click', function () {
+          [].forEach.call(btns, function (x) { x.classList.remove('on'); });
+          b.classList.add('on');
+          if (qrImg) { qrImg.removeAttribute('src'); qrBox.classList.remove('has-img'); }
+        });
+      });
+    }
+  })();
 </script>
 </body>
 </html>

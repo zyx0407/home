@@ -33,7 +33,9 @@ function detailHTML(w) {
   if (!text) {
     return '<p class="empty">这件作品的详情还没写 —— 在编辑模式（?edit=1）里补上，保存后这页会自动重生成。</p>';
   }
-  return text.split(/\n{2,}/).map((para) =>
+  // 「小鱼代笔」标注规则：正文顶部一行淡色小字，一段管整篇，正文不再逐段加「小鱼：」
+  const credit = '        <p class="credit">以下内容由小鱼整理编写</p>';
+  return credit + '\n' + text.split(/\n{2,}/).map((para) =>
     '        <p>' + esc(para).replace(/\n/g, '<br>') + '</p>'
   ).join('\n');
 }
@@ -44,7 +46,6 @@ function pageHTML(S, w, slug) {
   const tags = (w.tags || []).filter(Boolean).map((t) => '<span class="chip">' + esc(t) + '</span>').join('');
   const title = esc(w.title || '作品');
   const note = esc(w.note || '');
-  const desc = [w.title, w.note].filter(Boolean).join(' —— ');
   const link = (w.link && w.linkLabel)
     ? '\n        <p class="tags"><a class="go" href="' + esc(w.link) + '" target="_blank" rel="noopener">' + esc(w.linkLabel) + '</a></p>'
     : '';
@@ -57,9 +58,8 @@ function pageHTML(S, w, slug) {
 <meta name="color-scheme" content="light dark">
 <meta name="nightmode" content="disable">
 <title>${title} · ${esc(who.name || '')}</title>
-<meta name="description" content="${esc(desc)}">
+<link rel="icon" sizes="32x32" href="../../assets/favicon-32.png">
 <script src="../../theme.js"></script>
-<script src="../../assets/平滑滚动.js" defer></script>
 <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
