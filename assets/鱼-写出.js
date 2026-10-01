@@ -89,6 +89,9 @@
     if (STILL || reduce) still();
     else setTimeout(function () { if (!STILL) play(); }, opt.delay == null ? 380 : opt.delay);
     window.YuWrite.END = (opt.delay == null ? 380 : opt.delay) + END / SPEED;   // 真实结束时间（毫秒，含延迟）
+    /* 「最后一笔画完」的时刻（不含结尾 0.9s 定格）—— 给需要跟鱼对时的附属动画用；
+       对时若用 END，附属动画会比鱼视觉晚 0.9s（2026-10-01 卡背踩过）*/
+    window.YuWrite.DRAW_END = (opt.delay == null ? 380 : opt.delay) + EYE_T1 / SPEED;
 
     host.addEventListener('click', function () {
       if (STILL || reduce) return;

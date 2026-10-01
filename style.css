@@ -76,7 +76,9 @@
     font-family:var(--mono);font-size:12.5px;color:var(--muted);
     letter-spacing:.16em;text-transform:uppercase;margin:0 0 26px;
   }
-  h1{margin:0;font-family:var(--serif);font-weight:700;letter-spacing:.01em;font-size:clamp(30px,5.4vw,60px);line-height:1.24;max-width:20em}
+  h1{margin:0;font-family:var(--serif);font-weight:700;letter-spacing:.01em;font-size:clamp(30px,5.4vw,60px);line-height:1.24}
+  /* 20em 的换行约束只管「数据填进来的大标题」；挂在通用 h1 上会卡歪主页 .name（窄窗口 600–760px 偏左 19px，2026-10-01 修） */
+  h1[data-headline]{max-width:20em}
   h1 em{font-style:normal;position:relative;white-space:nowrap}
   h1 em::after{
     content:"";position:absolute;left:0;right:0;bottom:.06em;height:1px;background:var(--amber);opacity:.7;

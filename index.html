@@ -27,7 +27,7 @@
 
   /* 首屏别把「关于我」顶到太下面：收紧首屏下留白与段落间距 */
   section.block{margin-top:clamp(26px,5vh,58px)}
-  .name{font-size:clamp(24px,3.2vw,34px);letter-spacing:.02em;margin:0 0 10px}
+  .name{font-size:29px;letter-spacing:.02em;margin:0 0 10px}
   .tag,.sub{font-size:14.5px;color:var(--muted);margin:0 auto;max-width:33em;line-height:1.9}
   .links{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:0 0 16px}
   @media (max-width:430px){.links{grid-template-columns:repeat(2,1fr);gap:8px}}
@@ -112,7 +112,7 @@
   .top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:flex-end;
     padding:18px clamp(18px,3vw,30px) 0;gap:12px}
   .card{position:relative;width:min(560px,100%);border:1px solid var(--line);border-radius:12px;background:var(--card);
-    padding:clamp(26px,3.4vw,42px) clamp(20px,3vw,38px);text-align:center;
+    padding:34px 29px;text-align:center;
     box-shadow:0 1px 2px rgba(20,20,20,.04),0 16px 44px rgba(20,20,20,.05)}
   html[data-theme="night"] .card{box-shadow:0 1px 2px rgba(0,0,0,.5),0 18px 48px rgba(0,0,0,.45)}
   /* 主题按钮收进卡片右上角：平时淡，鼠标进卡片才亮 */
@@ -182,7 +182,7 @@
   <main id="page">
     <section class="hero">
       <div class="card">
-        <div class="avatar" id="avatarBox"><div id="mark" title="点一下：让它再写一遍"></div></div>
+        <div class="avatar" id="avatarBox"><div id="mark"></div></div>
         <h1 class="name" id="name"></h1>
         <p class="sub"></p>
         <div class="wire" id="wire"></div>
