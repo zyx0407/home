@@ -35,7 +35,7 @@
   border-top:1px solid rgba(127,127,127,.16);pointer-events:none}
 html[data-theme="night"] .leaf.ruled .rl{border-top-color:rgba(255,255,255,.10)}
 
-/* ── 翻页：无动画直切（饲养员拍板删掉动画）── 此段已空，样式见下方翻页钮/目录 ── */
+/* ── 翻页：无动画直切（样式见下方翻页钮/目录）── */
 /* ── 翻页钮 / 页码 / 留一页(胶囊与圆钮都走主站语言) ── */
 .nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;
   border:1px solid var(--chip);background:var(--bg);color:var(--ink);font-size:18px;line-height:1;
@@ -101,7 +101,7 @@ html[data-theme="night"] .leaf.ruled .rl{border-top-color:rgba(255,255,255,.10)}
   .spread{grid-template-columns:1fr}
   .spine{display:none}
   .spread > .leaf.left{display:none}
-  /* 窄屏翻页钮：贴在册子左右两侧，不隐藏（饲养员定案：只留左右钮） */
+  /* 窄屏翻页钮：贴在册子左右两侧，不隐藏（只留左右钮） */
   .nav.prev{left:6px}.nav.next{right:6px}
 }
 

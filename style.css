@@ -69,7 +69,7 @@
   html[data-theme="night"] .theme .ico-moon{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.theme svg{transition:none}}
 
-  /* 日 / 夜 切换：直接换、不做过渡（他 2026-09-26 定；页面其它动效照旧保留） */
+  /* 日 / 夜 切换：直接换、不做过渡（页面其它动效照旧保留） */
 
   .hero{padding:clamp(60px,12vh,140px) 0 clamp(52px,9vh,110px)}
   .kicker{

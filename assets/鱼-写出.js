@@ -1,6 +1,6 @@
 /* 连笔鱼标「一笔一笔写出来」播放器
-   笔迹路径与时间轴复用自 `美术资源\图标-zyx鱼\动效\连笔-写出.html`（他 2026-09-23 做的那套）。
-   本站的改动：① 去掉荧光青的笔尖流光与光环（他 2026-09-26 定：不要笔尖光点）
+   笔迹路径与时间轴来自同一套连笔鱼标的动效源件。
+   这一版与源件的不同：① 去掉荧光青的笔尖流光与光环（不要笔尖光点）
               ② 线条跟随 currentColor（不再固定白墨），白天跟随 --ink、夜里也一样
               ③ 可以挂到任意容器、可指定速度（默认 1.5 倍，写出约 4.3 秒）
               ④ 点一下重播；系统开了「减少动态效果」直接显示完成态
@@ -90,7 +90,7 @@
     else setTimeout(function () { if (!STILL) play(); }, opt.delay == null ? 380 : opt.delay);
     window.YuWrite.END = (opt.delay == null ? 380 : opt.delay) + END / SPEED;   // 真实结束时间（毫秒，含延迟）
     /* 「最后一笔画完」的时刻（不含结尾 0.9s 定格）—— 给需要跟鱼对时的附属动画用；
-       对时若用 END，附属动画会比鱼视觉晚 0.9s（2026-10-01 卡背踩过）*/
+       对时若用 END，附属动画会比鱼的视觉完成时间晚 0.9s */
     window.YuWrite.DRAW_END = (opt.delay == null ? 380 : opt.delay) + EYE_T1 / SPEED;
 
     host.addEventListener('click', function () {

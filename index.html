@@ -37,7 +37,7 @@
     transition:border-color .22s,color .22s,background-color .22s}
   .lnk:hover{border-color:var(--amber);color:var(--amber);background:var(--bg)}
   .lnk.soon{cursor:default}
-  /* 桌面 hover：图标右移 + 琥珀下划线从中间展开（动效定案 2026-09-30） */
+  /* 桌面 hover：图标右移 + 琥珀下划线从中间展开 */
   @media (hover:hover) and (pointer:fine){
     .lnk{position:relative}
     .lnk::after{content:"";position:absolute;left:50%;bottom:3px;width:22px;height:1px;background:var(--amber);
@@ -196,7 +196,7 @@
 </div>
 
 
-<!-- 投喂：收款码浮层（单码居中 + 微信/支付宝双图标切换；真码图待饲养员给） -->
+<!-- 投喂：收款码浮层（单码居中 + 微信/支付宝双图标切换） -->
 <div class="feed-mask" id="feedMask" role="dialog" aria-modal="true" aria-label="投喂">
   <div class="feed-box">
     <button type="button" class="feed-close" id="feedClose" aria-label="关闭">×</button>

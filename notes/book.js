@@ -1,7 +1,7 @@
 /* 札记 · 留言书 —— 翻页 / 目录 / 留一页
  * 页模型:第 0 页 = 封面;留言从第 1 页起,两页一翻。
  *   对开 cur 显示第 (cur*2) 与 (cur*2+1) 页;totalLeaves-1 = 最后一个对开。
- * 翻页 v4:无动画直切(饲养员拍板删掉动画,只留左右钮+键盘)。
+ * 翻页:无动画直切,只留左右钮 + 键盘。
  */
 import './notes-data.js';
 
@@ -29,7 +29,7 @@ async function loadFish() {
     try {
         const r = await fetch('../assets/鱼-白墨.svg');
         const t = await r.text();
-        // ⚠️ viewBox 在 <svg> 标签上,只抠 <g> 会把坐标系弄丢(踩过:鱼"存在但看不见")。
+        // ⚠️ viewBox 在 <svg> 标签上，只抠 <g> 会丢掉坐标系（鱼会「存在但看不见」）。
         fishSvg = t.replace(/stroke="#[0-9a-fA-F]{3,6}"/g, 'stroke="currentColor"')
                    .replace(/fill="#[0-9a-fA-F]{3,6}"/g, 'fill="currentColor"')
                    .replace('<svg ', '<svg width="76" height="76" style="color:inherit" ');
@@ -122,7 +122,7 @@ function renderSpread() {
     publishProbe();
 }
 
-// ── 翻页（定版·无动画直切）：饲养员拍板删掉翻页动画、直接切换。只留左右钮 + 键盘。 ──
+// ── 翻页：定版无动画直切，只留左右钮 + 键盘 ──
 function turn(dir) {
     const next = cur + dir;
     if (next < 0 || next > totalLeaves - 1) return;
@@ -158,8 +158,8 @@ function gotoPage(pageIdx) {             // 落在包含该页的对开
     cur = target; renderSpread(); closeToc();
 }
 
-// ── 数据源:同域有 /notes 接口(本地 serve-notes.mjs / 以后的服务器后端)就走接口;
-//    没有(GitHub Pages 纯静态)就退回 notes-data.js + localStorage —— 一套代码两种部署。
+// ── 数据源:同域有 /notes 接口就走接口;
+//    没有(纯静态部署)就退回 notes-data.js + localStorage —— 一套代码两种部署。
 const API = '/notes';
 let apiOnline = false;
 
@@ -210,7 +210,7 @@ function flashSheet(msg) {               // 便签内轻提示(不改颜色、�
     cnt.textContent = msg; cnt.style.color = 'var(--amber)';
 }
 
-// ── 输入接线：只留左右钮 + 键盘 ← → PgUp/PgDn（饲养员定案：禁手动翻页，拖角/点页/点角/触摸滑动全不要） ──
+// ── 输入接线：只留左右钮 + 键盘 ← → PgUp/PgDn（不接手动翻页：拖角/点页/点角/触摸滑动都不做） ──
 prevBtn.addEventListener('click', () => turn(-1));
 nextBtn.addEventListener('click', () => turn(1));
 addEventListener('keydown', e => {
