@@ -1,0 +1,12 @@
+# 出图与预览产物（本机验收用，不进仓库）
+_预览/
+notes/_shots/
+notes/_shot-*.png
+
+# 本机开发脚本（只在本机跑，不服务公网）
+serve-*.mjs
+edit-about.js
+
+# 站内预留页：文件在本机，暂不进仓库
+back/
+go/
