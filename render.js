@@ -16,23 +16,17 @@
 
   function workHTML(w, i) {
     w = w || {};
-    var tags = (w.tags || []).filter(function (t) { return t; }).map(function (t) {
-      return '<span class="chip">' + esc(t) + '</span>';
-    }).join('');
-    var slot = (w.link && w.linkLabel)
-      ? '<a href="' + esc(w.link) + '" target="_blank" rel="noopener">' + esc(w.linkLabel) + '</a>'
-      : esc(w.year || '');
+    var links = (w.link && w.linkLabel)
+      ? '<a class="w-link" href="' + esc(w.link) + '" target="_blank" rel="noopener">' + esc(w.linkLabel) + ' ↗</a>'
+      : '';
     return '' +
-      '<article class="item rv" data-work="' + i + '">' +
-        '<div class="no">' + pad(i + 1) + '</div>' +
-        '<div>' +
-          '<h2 data-work-title="' + i + '">' +
-            (w.slug ? '<a href="' + encodeURIComponent(w.slug) + '/">' + esc(w.title) + '</a>' : esc(w.title)) +
-          '</h2>' +
-          '<p class="note" data-work-note="' + i + '">' + esc(w.note) + '</p>' +
-          (tags ? '<p class="tags">' + tags + '</p>' : '') +
-        '</div>' +
-        '<div class="year" data-work-year="' + i + '">' + slot + '</div>' +
+      '<article class="rcard' + (i === 0 ? ' on' : '') + '" data-i="' + i + '">' +
+        '<span class="rc-fish" aria-hidden="true"><img src="../assets/鱼-黑墨.svg" alt=""></span>' +
+        '<span class="rc-no">' + pad(i + 1) + '</span>' +
+        '<h2 class="rc-title">' + esc(w.title) + '</h2>' +
+        '<span class="rc-year">' + esc(w.year || '') + '</span>' +
+        (w.note ? '<p class="rc-note">' + esc(w.note) + '</p>' : '') +
+        (links ? '<div class="rc-links">' + links + '</div>' : '') +
       '</article>';
   }
 

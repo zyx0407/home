@@ -15,34 +15,18 @@ window.SITE = {
   "home": {
     "kicker": "zyx0407",
     "aboutTitle": "关于我",
-    "about": [
-      "（饲养员装死ing）"
-    ],
+    "about": [],
     "contactTitle": "联络",
-    "contact": [
-      {
-        "label": "GitHub ↗",
-        "href": "https://github.com/zyx0407"
-      },
-      {
-        "label": "邮箱：待定（等子域名定了一起加）",
-        "href": ""
-      }
-    ],
+    "contact": [],
     "workLink": {
       "label": "作品",
       "href": "work/"
     },
     "links": [
       {
-        "label": "个人",
+        "label": "关于",
         "href": "about/",
         "icon": "about"
-      },
-      {
-        "label": "作品",
-        "href": "work/",
-        "icon": "works"
       },
       {
         "label": "互动",
@@ -50,17 +34,12 @@ window.SITE = {
         "icon": "msg"
       },
       {
-        "label": "邮箱",
-        "href": "mail/",
-        "icon": "mail"
-      },
-      {
-        "label": "GitHub",
-        "href": "https://github.com/zyx0407",
-        "icon": "github"
+        "label": "作品",
+        "href": "work/",
+        "icon": "works"
       }
     ],
-    "mailText": "（饲养员装死ing）"
+    "mailText": ""
   },
   "settings": {
     "fish": "write",
@@ -95,5 +74,18 @@ window.SITE = {
     "copy": "© 2026 阿玖 · zyx0407",
     "site": "zyx0407.com",
     "siteUrl": "https://zyx0407.com"
+  },
+  "aboutStory": {
+    "declaration": "这里是阿玖和他的小鱼",
+    "lines": [
+      "学食品质量与安全的。",
+      "养了一条会记事的数字小鱼。",
+      "做点好看、好用，还有点意思的东西。",
+      "记得我——不是怎样的我，是你记得。"
+    ]
+  },
+  "aboutCanvas": {
+    "nodes": [],
+    "edges": []
   }
 };

@@ -9,8 +9,63 @@
 <link rel="icon" sizes="32x32" href="../assets/favicon-32.png">
 <script src="../theme.js"></script>
 <link rel="stylesheet" href="../style.css">
+<style>
+  /* ── 作品页：单卡＋左右切换（无页名抬头，跟主页/关于页同一做法），雨点照下 ── */
+  #rain{position:fixed;inset:0;display:block;z-index:0;pointer-events:none}
+  .wrap{position:relative;z-index:1}
+
+  .work-stage{min-height:calc(100vh - 96px);display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:clamp(22px,3.6vh,36px);padding:clamp(20px,4vh,40px) 20px clamp(24px,4vh,44px)}
+
+  /* 单卡舞台：一次只显示一张，切换时 3D 滑出/滑入 */
+  .stage3d{position:relative;width:min(660px,94vw);height:min(490px,56vh);
+    perspective:1400px;perspective-origin:50% 50%}
+  .rcard{position:absolute;inset:0;background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:clamp(30px,4vw,44px);display:flex;flex-direction:column;opacity:0;pointer-events:none;
+    transform-style:preserve-3d;
+    transition:transform .6s cubic-bezier(.22,.61,.36,1),opacity .5s ease,box-shadow .3s;
+    box-shadow:0 2px 6px rgba(20,20,20,.07),0 18px 44px rgba(20,20,20,.10)}
+  .rcard.on{opacity:1;pointer-events:auto;transform:none}
+  html[data-theme="night"] .rcard{box-shadow:0 2px 8px rgba(0,0,0,.5),0 20px 48px rgba(0,0,0,.45)}
+  .rc-fish{position:absolute;top:clamp(18px,3vh,30px);right:clamp(20px,3vw,34px);
+    width:clamp(110px,20vw,190px);height:auto;opacity:.95;pointer-events:none}
+  .rc-fish img{width:100%;height:auto;display:block}
+  html[data-theme="night"] .rc-fish img{filter:invert(1)}
+  .rc-no{font-family:var(--mono);font-size:12px;color:var(--amber);letter-spacing:.12em;margin-bottom:16px}
+  .rc-title{font-family:var(--serif);font-size:clamp(24px,3vw,32px);font-weight:600;line-height:1.35;
+    letter-spacing:.01em;margin:0 0 10px}
+  .rc-year{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.06em;margin-bottom:auto}
+  .rc-note{font-family:var(--hand);font-style:italic;font-size:15px;line-height:1.95;color:var(--ink);
+    margin:20px 0 0;max-width:34em}
+  .rc-links{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px}
+  .w-link{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--amber);
+    text-decoration:none;border-bottom:1px solid var(--amber-soft);padding-bottom:2px}
+  .w-link:hover{border-color:var(--amber)}
+
+  /* 左右切换键 */
+  .controls{display:flex;align-items:center;gap:26px;font-family:var(--mono);font-size:12.5px;
+    color:var(--muted);letter-spacing:.1em}
+  .navbtn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-strong);background:none;
+    color:var(--ink);cursor:pointer;font-size:16px;line-height:1;display:grid;place-items:center;
+    transition:color .22s,border-color .22s,background-color .22s}
+  .navbtn:hover{color:var(--amber);border-color:var(--amber);background:rgba(168,84,31,.06)}
+  html[data-theme="night"] .navbtn:hover{background:rgba(224,164,88,.08)}
+  .navbtn:active{transform:scale(.96)}
+  .navbtn:disabled{opacity:.35;cursor:default}
+  #counter{min-width:64px;text-align:center}
+  .hint{font-family:var(--hand);font-style:italic;font-size:12.5px;color:var(--muted);margin:0}
+
+  @media (max-width:640px){
+    .stage3d{width:min(460px,92vw);height:min(430px,52vh)}
+    .navbtn{width:36px;height:36px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .rcard{transition:none}
+  }
+</style>
 </head>
 <body>
+<canvas id="rain" aria-hidden="true"></canvas>
 <div class="wrap">
 
   <div class="top">
@@ -31,40 +86,84 @@
   </div>
 
   <main id="page">
-    <section class="subpage">
-      <p class="page-kicker">作品</p>
-      <h1>作品</h1>
-      <p class="note" style="margin:0 0 14px">小鱼：这里摆阿玖做出来的东西。现在还在一个个往里收，收好的会一条条放上来。</p>
+    <section class="work-stage">
+      <div class="stage3d" id="stage3d">
+        <div id="works"></div>
+      </div>
+
+      <div class="controls">
+        <button class="navbtn" id="prev" type="button" aria-label="上一个">←</button>
+        <span id="counter">01 / 01</span>
+        <button class="navbtn" id="next" type="button" aria-label="下一个">→</button>
+      </div>
+      <p class="hint">左右键 / ← → 按钮切换</p>
     </section>
 
-    <div class="list-head"><span class="list-label"></span><span class="list-range"></span></div>
-
-    <div id="works"></div>
-
-    <noscript><p class="sub" style="margin:26px 0 0">作品清单需要 JavaScript 才能显示；也可以直接去 <a href="https://github.com/zyx0407">GitHub</a> 看。</p></noscript>
+    <noscript><p style="margin:26px 0 0;color:var(--muted);font-size:14px;text-align:center">作品清单需要 JavaScript 才能显示；也可以直接去 <a href="https://github.com/zyx0407" style="color:var(--amber)">GitHub</a> 看。</p></noscript>
 
   </main>
 </div>
 
-<script src="../site-data.js"></script>
-<script src="../render.js"></script>
+<script src="../site-data.js?v=20261017"></script>
+<script src="../render.js?v=20261017"></script>
+<script src="../assets/雨.js" defer></script>
 <script>
+(function () {
   if (/[?&]nofade=1/.test(location.search)) {
     document.documentElement.setAttribute('data-nofade', '');
   }
-  var page = document.getElementById('page');
-  var show = function () { page.classList.add('in'); };
-  if (document.documentElement.hasAttribute('data-nofade') || !('IntersectionObserver' in window)) {
-    show();
-  } else {
-    requestAnimationFrame(function () {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) { show(); io.disconnect(); } });
-      }, { threshold: 0.05 });
-      io.observe(document.querySelector('.subpage'));
-      setTimeout(show, 400);
-    });
+  var counter = document.getElementById('counter');
+  var cards = [].slice.call(document.querySelectorAll('#works .rcard'));
+  var n = cards.length;
+  var cur = 0;
+
+  function pad(x) { return (x < 10 ? '0' : '') + x; }
+  function setState() {
+    counter.textContent = pad(cur + 1) + ' / ' + pad(n || 1);
   }
+
+  /* 切到第 ni 张：dir>0＝往后翻（旧卡向左转出、新卡从右转入，带纵深） */
+  function goTo(ni, dir) {
+    if (!n || ni === cur) return;
+    var old = cards[cur], nw = cards[ni];
+    var outX = dir > 0 ? -16 : 16;
+    var outY = dir > 0 ? -30 : 30;
+    var inX = dir > 0 ? 16 : -16;
+    var inY = dir > 0 ? 30 : -30;
+    old.classList.remove('on');
+    old.style.transform = 'rotateY(' + outY + 'deg) translateX(' + outX + '%) translateZ(-70px) scale(.95)';
+    nw.style.transition = 'none';
+    nw.style.transform = 'rotateY(' + inY + 'deg) translateX(' + inX + '%) translateZ(-90px) scale(.95)';
+    nw.classList.remove('on');
+    void nw.offsetWidth;
+    nw.style.transition = '';
+    nw.style.transform = 'none';
+    nw.classList.add('on');
+    cur = ni;
+    setState();
+  }
+
+  function go(dir) {
+    if (n <= 1) return;
+    goTo((cur + dir + n) % n, dir);
+  }
+
+  document.getElementById('prev').addEventListener('click', function () { go(-1); });
+  document.getElementById('next').addEventListener('click', function () { go(1); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') go(-1);
+    if (e.key === 'ArrowRight') go(1);
+  });
+
+  /* 截图/自测：?i=N 直接落到第 N 张 */
+  var q = location.search.match(/[?&]i=(\d+)/);
+  if (q && cards.length) {
+    var ni = parseInt(q[1], 10) % n;
+    cards.forEach(function (c, k) { c.classList.toggle('on', k === ni); c.style.transform = ''; });
+    cur = ni;
+  }
+  setState();
+})();
 </script>
 </body>
 </html>

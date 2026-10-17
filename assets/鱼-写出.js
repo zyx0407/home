@@ -17,7 +17,9 @@
     if (!host) return null;
     opt = opt || {};
     var SPEED = Math.max(0.1, opt.speed || 1);
-    var STILL = !!opt.still;
+    /* 双口径：调用方传的 still ＋ 页面公共的 ?still=1／系统偏好（YYLoop.reduced）。
+       只认 matchMedia 会漏掉 URL 覆盖——无头出图与验收脚本就走这条路（2026-10-14 廿二期实测教训） */
+    var STILL = !!opt.still || !!(window.YYLoop && YYLoop.reduced);
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     host.innerHTML = '<svg class="yu-svg" viewBox="0 0 1024 1024" role="img" ' +
@@ -70,7 +72,7 @@
       return tt;
     }
 
-    var raf = null, finished = false, unlocked = false;
+    var raf = null, finished = false, unlocked = false, startTimer = null;
     function play() {
       cancelAnimationFrame(raf);
       unlocked = false;
@@ -87,19 +89,32 @@
     function still() { cancelAnimationFrame(raf); renderAt(END); finished = true; unlocked = true; }
 
     if (STILL || reduce) still();
-    else setTimeout(function () { if (!STILL) play(); }, opt.delay == null ? 380 : opt.delay);
+    else startTimer = setTimeout(function () { if (!STILL) play(); }, opt.delay == null ? 380 : opt.delay);
     window.YuWrite.END = (opt.delay == null ? 380 : opt.delay) + END / SPEED;   // 真实结束时间（毫秒，含延迟）
     /* 「最后一笔画完」的时刻（不含结尾 0.9s 定格）—— 给需要跟鱼对时的附属动画用；
        对时若用 END，附属动画会比鱼的视觉完成时间晚 0.9s */
     window.YuWrite.DRAW_END = (opt.delay == null ? 380 : opt.delay) + EYE_T1 / SPEED;
 
-    host.addEventListener('click', function () {
+    function onClick() {
       if (STILL || reduce) return;
       if (!unlocked) { still(); unlocked = true; }   // 写到一半被点：直接给完成态
       else play();                                    // 写完再点：重播
-    });
+    }
+    host.addEventListener('click', onClick);
 
-    return { play: play, still: still, isFinished: function () { return finished; } };
+    /* destroy()：家规 09「能挂上去就要能拆干净」——摘 rAF、清起跑定时器、摘 click 监听、清空宿主。
+       宿主原有属性不动（这里只动我们自己的东西），拆完可以重新 mount。 */
+    function destroy() {
+      if (raf) cancelAnimationFrame(raf);
+      raf = null;
+      if (startTimer) clearTimeout(startTimer);
+      startTimer = null;
+      host.removeEventListener('click', onClick);
+      host.innerHTML = '';
+      finished = false; unlocked = false;
+    }
+
+    return { play: play, still: still, destroy: destroy, isFinished: function () { return finished; } };
   }
 
   window.YuWrite = { mount: mount, END: 0 };
