@@ -142,7 +142,7 @@
   @media (max-width:640px){
     .item{grid-template-columns:38px 1fr}
     .year{grid-column:2;text-align:left;padding-top:6px}
-    .top{flex-direction:column;align-items:flex-start;gap:12px}
+    .top{flex-direction:row;align-items:center;justify-content:space-between;gap:12px}
   }
 
   /* ── 作品详情页（由 build.mjs 生成的 work\*.html 用） ── */
