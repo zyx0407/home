@@ -6,90 +6,11 @@
 <meta name="color-scheme" content="light dark">
 <meta name="nightmode" content="disable">
 <title>关于 · 阿玖</title>
-<meta name="description" content="这里是阿玖和他的小鱼。">
 <link rel="icon" sizes="32x32" href="../assets/favicon-32.png">
 <script src="../theme.js"></script>
 <link rel="stylesheet" href="../style.css">
-<style>
-  /* ── 关于页：便签墙（站点色＋可拖），雨点照下 ── */
-  #rain{position:fixed;inset:0;display:block;z-index:0;pointer-events:none}
-  .wrap{position:relative;z-index:1}
-  .about-page{min-height:100vh;display:flex;flex-direction:column;align-items:center;
-    padding:96px 24px clamp(48px,8vh,90px);text-align:center}
-  .ab-fish{width:112px;height:auto;margin-bottom:26px;transform:rotate(-2deg);opacity:.95}
-  html[data-theme="night"] .ab-fish{filter:invert(1)}
-  .ab-kicker{font-family:var(--hand),serif;font-style:italic;font-size:13.5px;color:var(--muted);
-    letter-spacing:.08em;margin:0 0 12px}
-  .ab-decl{font-family:var(--serif);font-size:clamp(26px,4vw,38px);font-weight:600;
-    line-height:1.4;letter-spacing:.02em;margin:0 0 clamp(26px,4vh,40px);max-width:20em}
-  /* 手绘箭头 */
-  .ab-arrow{width:64px;height:auto;color:var(--muted);margin:0 auto 8px;display:block}
-  /* 便签墙：纸色/琥珀淡色两种，微旋转错落 */
-  .sticky-wall{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;max-width:840px;margin:0 auto}
-  .sticky{position:relative;width:196px;min-height:104px;padding:20px 16px 18px;border-radius:3px;
-    display:flex;align-items:center;justify-content:center;text-align:center;cursor:grab;
-    background:var(--card);border:1px solid var(--line);color:var(--muted);
-    font-family:var(--hand),serif;font-style:italic;font-size:14.5px;line-height:1.85;
-    box-shadow:0 1px 2px rgba(20,20,20,.06),0 10px 22px rgba(20,20,20,.09);
-    user-select:none;-webkit-user-select:none;touch-action:none}
-  html[data-theme="night"] .sticky{box-shadow:0 1px 3px rgba(0,0,0,.4),0 12px 24px rgba(0,0,0,.35)}
-  .s1,.s2,.s3,.s4{transform:none}
-  .sticky.dragging{z-index:6;cursor:grabbing;box-shadow:0 6px 14px rgba(20,20,20,.14),0 22px 40px rgba(20,20,20,.16)}
-  html[data-theme="night"] .sticky.dragging{box-shadow:0 6px 16px rgba(0,0,0,.5),0 24px 44px rgba(0,0,0,.45)}
-  .sticky b{font-family:var(--serif);font-style:normal;font-weight:600;font-size:17px;
-    margin:0;letter-spacing:.02em;color:var(--ink)}
-  /* 问答：两张便签（小鱼问／阿玖答），跟便签墙同语言 */
-  /* （2026-10-17 他判丑，问答已删；样式一并清） */
-  .qa-wall,.qa-card,.qa-by,.qa-text{display:none}
-  .sticky .pin,.qa-card .pin{position:absolute;top:-7px;left:50%;width:12px;height:12px;border-radius:50%;
-    transform:translateX(-50%);background:var(--amber);opacity:.55;box-shadow:0 1px 2px rgba(0,0,0,.2)}
-  /* 小物件：信封 → 点开名片 */
-  .envelope{appearance:none;border:0;background:none;cursor:pointer;margin-top:clamp(34px,6vh,56px);
-    padding:10px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px;transition:color .22s}
-  .envelope:hover{color:var(--amber)}
-  .envelope svg{width:60px;height:auto;display:block;transform:rotate(-2deg);transition:transform .3s cubic-bezier(.22,.61,.36,1)}
-  .envelope:hover svg{transform:rotate(0) translateY(-2px)}
-  .envelope span{font-family:var(--hand),serif;font-style:italic;font-size:13px;letter-spacing:.06em}
-
-  /* 名片弹层（复用） */
-  .card-mask{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;
-    background:rgba(10,12,10,.52);padding:22px;opacity:0;visibility:hidden;transition:opacity .26s ease,visibility .26s}
-  .card-mask.on{opacity:1;visibility:visible}
-  .namecard{position:relative;width:min(760px,100%);display:grid;
-    grid-template-columns:clamp(160px,22vw,220px) 1fr;
-    border:1px solid var(--amber);border-radius:14px;background:var(--card);overflow:hidden;
-    box-shadow:0 2px 6px rgba(20,20,20,.10),0 20px 54px rgba(20,20,20,.14);
-    transform:translateY(14px) scale(.97);transition:transform .32s cubic-bezier(.22,.61,.36,1)}
-  html[data-theme="night"] .namecard{box-shadow:0 2px 8px rgba(0,0,0,.5),0 22px 56px rgba(0,0,0,.5)}
-  .card-mask.on .namecard{transform:none}
-  .nc-avatar{display:flex;align-items:center;justify-content:center;background:var(--bg);border-right:1px solid var(--line)}
-  .nc-avatar img{width:60%;max-width:130px;height:auto;display:block}
-  html[data-theme="night"] .nc-avatar img{filter:invert(1)}
-  .nc-info{padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;justify-content:center}
-  .nc-name{font-family:var(--serif);font-size:clamp(30px,4vw,40px);font-weight:600;letter-spacing:.02em;line-height:1.15;margin:0 0 10px}
-  .nc-sub{font-size:14px;line-height:1.8;color:var(--muted);margin:0 0 18px}
-  .nc-links{border-top:1px solid var(--line);display:flex;flex-direction:column}
-  .ab-link{display:flex;align-items:baseline;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);
-    font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-decoration:none;color:var(--ink);transition:color .22s}
-  .ab-link:hover{color:var(--amber)}
-  .ab-label{width:60px;flex:none;color:var(--muted);font-size:11.5px;letter-spacing:.12em}
-  .ab-val{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .ab-arrow{color:var(--amber);flex:none}
-  .nc-close{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;
-    border:1px solid var(--chip);background:var(--card);color:var(--muted);font-size:14px;line-height:1;
-    display:grid;place-items:center;cursor:pointer;z-index:2;transition:color .22s,border-color .22s}
-  .nc-close:hover{color:var(--amber);border-color:var(--amber)}
-  @media (max-width:640px){
-    .namecard{grid-template-columns:1fr}
-    .nc-avatar{border-right:0;border-bottom:1px solid var(--line);padding:22px 0}
-    .nc-avatar img{width:84px}
-    .sticky{width:calc(50% - 10px);max-width:196px;min-height:92px;padding:16px 12px}
-    .sticky b{font-size:15px;letter-spacing:0}
-  }
-</style>
 </head>
 <body>
-<canvas id="rain" aria-hidden="true"></canvas>
 <div class="wrap">
   <div class="top">
     <a class="back" href="../">← 回主页</a>
@@ -109,146 +30,12 @@
   </div>
 
   <main id="page">
-    <section class="about-page">
-      <img class="ab-fish" src="../assets/鱼-黑墨.svg" alt="阿玖的鱼标">
-      <p class="ab-kicker">about · 关于</p>
-      <h1 class="ab-decl" id="abDecl"></h1>
-      <svg class="ab-arrow" viewBox="0 0 64 34" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 6 C 18 22, 38 26, 56 20"></path>
-        <path d="M49 14 L57 20 L48 25"></path>
-      </svg>
-      <div class="sticky-wall" id="stickyWall"></div>
-
-      <button class="envelope" id="envOpen" type="button" aria-label="打开名片">
-        <svg viewBox="0 0 120 84" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="7" y="12" width="106" height="62" rx="5"></rect>
-          <path d="M7 16 L60 52 L113 16"></path>
-        </svg>
-        <span>信封里还有一张名片。</span>
-      </button>
+    <section class="subpage">
+      <p class="page-kicker">关于</p>
+      <h1>关于</h1>
+      <p class="note">小鱼：这一页也在施工——新版在路上，过阵子来。</p>
     </section>
   </main>
 </div>
-
-<!-- 名片弹层 -->
-<div class="card-mask" id="cardMask" hidden>
-  <div class="namecard" role="dialog" aria-modal="true" aria-label="阿玖的名片">
-    <button class="nc-close" id="cardClose" type="button" aria-label="收起名片">✕</button>
-    <div class="nc-avatar"><img src="../assets/鱼-黑墨.svg" alt="阿玖的鱼标"></div>
-    <div class="nc-info">
-      <p class="nc-name">阿玖</p>
-      <p class="nc-sub">想带着自己的小鱼周游世界。</p>
-      <div class="nc-links">
-        <a class="ab-link" id="aboutWechat" href="#" title="点击复制微信号">
-          <span class="ab-label">WECHAT</span><span class="ab-val" id="aboutWechatVal"></span><span class="ab-arrow">↗</span>
-        </a>
-        <a class="ab-link" id="aboutMail" href="#">
-          <span class="ab-label">EMAIL</span><span class="ab-val" id="aboutMailVal"></span><span class="ab-arrow">↗</span>
-        </a>
-        <a class="ab-link" href="https://github.com/zyx0407" target="_blank" rel="noopener">
-          <span class="ab-label">GITHUB</span><span class="ab-val">github.com/zyx0407</span><span class="ab-arrow">↗</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="../site-data.js"></script>
-<script src="../assets/雨.js" defer></script>
-<script>
-(function () {
-  var S = window.SITE && window.SITE.aboutStory;
-  /* 便签墙内容（他给的四个词；站点色；可拖动） */
-  var stickies = [
-    { cls: 's1', rot: -2, t: '洛阳' },
-    { cls: 's2', rot: 1.6, t: '大四学生' },
-    { cls: 's3', rot: -1.2, t: '极简主义' },
-    { cls: 's4', rot: 2, t: '喜欢有趣的东西' }
-  ];
-  var wall = document.getElementById('stickyWall');
-  if (wall) {
-    wall.innerHTML = stickies.map(function (s) {
-      return '<div class="sticky ' + s.cls + '" data-rot="' + s.rot + '" style="transform:rotate(' + s.rot + 'deg)">' +
-        '<i class="pin" aria-hidden="true"></i><b>' + s.t + '</b>' + (s.d || '') + '</div>';
-    }).join('');
-    /* 便签可拖动：按住拖到任意位置（限在本页附近），初始旋转角保留 */
-    [].slice.call(wall.querySelectorAll('.sticky')).forEach(function (el) {
-      var rot = parseFloat(el.getAttribute('data-rot')) || 0;
-      var sx = 0, sy = 0, ox = 0, oy = 0, dragging = false;
-      el.addEventListener('pointerdown', function (e) {
-        if (e.button && e.button !== 0) return;
-        e.preventDefault();
-        dragging = true;
-        sx = e.clientX; sy = e.clientY; ox = el._dx || 0; oy = el._dy || 0;
-        try { el.setPointerCapture(e.pointerId); } catch (err) {}
-        el.classList.add('dragging');
-      });
-      el.addEventListener('pointermove', function (e) {
-        if (!dragging) return;
-        var dx = Math.max(-200, Math.min(200, ox + (e.clientX - sx)));
-        var dy = Math.max(-140, Math.min(140, oy + (e.clientY - sy)));
-        el._dx = dx; el._dy = dy;
-        el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg)';
-      });
-      function endDrag() {
-        if (!dragging) return;
-        dragging = false;
-        el.classList.remove('dragging');
-      }
-      el.addEventListener('pointerup', endDrag);
-      el.addEventListener('pointercancel', endDrag);
-    });
-  }
-  if (S && S.declaration) { var d = document.getElementById('abDecl'); if (d) d.textContent = S.declaration; }
-
-  /* 名片弹层 */
-  var mask = document.getElementById('cardMask');
-  var openBtn = document.getElementById('envOpen');
-  var closeBtn = document.getElementById('cardClose');
-  function openCard() { mask.hidden = false; requestAnimationFrame(function () { mask.classList.add('on'); }); }
-  function closeCard() { mask.classList.remove('on'); setTimeout(function () { mask.hidden = true; }, 280); }
-  openBtn.addEventListener('click', openCard);
-  closeBtn.addEventListener('click', closeCard);
-  mask.addEventListener('click', function (e) { if (e.target === mask) closeCard(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !mask.hidden) closeCard(); });
-  if (/[?&]card=1/.test(location.search)) {   /* 截图/自测用：直接落终态 */
-    mask.hidden = false;
-    mask.style.transition = 'none';
-    mask.classList.add('on');
-    var nc = mask.querySelector('.namecard');
-    if (nc) nc.style.transition = 'none';
-  }
-
-  /* 地址不进 HTML：字符码在运行时拼装 */
-  var mailEl = document.getElementById('aboutMail');
-  var valEl = document.getElementById('aboutMailVal');
-  if (mailEl && valEl) {
-    var codes = [104,105,64,122,121,120,48,52,48,55,46,99,111,109]; /* hi@zyx0407.com */
-    var addr = '';
-    for (var i = 0; i < codes.length; i++) addr += String.fromCharCode(codes[i]);
-    valEl.textContent = addr;
-    mailEl.href = 'mailto:' + addr;
-  }
-  /* 微信号同样字符码拼装；点一下复制 */
-  var wxEl = document.getElementById('aboutWechat');
-  var wxVal = document.getElementById('aboutWechatVal');
-  if (wxEl && wxVal) {
-    var wcodes = [97,106,105,117,95,48,52,48,55]; /* ajiu_0407 */
-    var wx = '';
-    for (var j = 0; j < wcodes.length; j++) wx += String.fromCharCode(wcodes[j]);
-    wxVal.textContent = wx;
-    wxEl.addEventListener('click', function (e) {
-      e.preventDefault();
-      var flash = function () {
-        wxVal.textContent = '已复制';
-        setTimeout(function () { wxVal.textContent = wx; }, 1400);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(wx).then(flash, function () {});
-      }
-    });
-  }
-})();
-</script>
 </body>
 </html>
