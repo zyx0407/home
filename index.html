@@ -517,7 +517,7 @@
     var sw = document.getElementById('feedSwitch');
     var qrBox = document.getElementById('feedQr');
     var qrImg = document.getElementById('feedQrImg');
-    var QR = { wx: 'assets/投喂-微信.png', alipay: 'assets/投喂-支付宝.png' };
+    var QR = { wx: 'assets/投喂-微信.png?v=2', alipay: 'assets/投喂-支付宝.png?v=2' };
     var btns = sw ? [].slice.call(sw.querySelectorAll('button')) : [];
     function showPay(pay) {
       btns.forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-pay') === pay); });
