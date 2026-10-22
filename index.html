@@ -82,43 +82,11 @@
   .lnk.soon:hover{border-color:var(--chip);color:var(--muted);background:none}
   .lnk svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
   .legal{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em;margin:0}
-
-  /* 投喂：卡片底部引导话板 + 收款码浮层 */
-  .feed-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px auto 0;width:100%;
-    border:0;background:none;cursor:pointer;color:var(--muted);font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;
-    padding:6px 12px;border-radius:999px;transition:color .22s,background-color .22s}
-  .feed-hint b{font-weight:600;color:var(--amber)}
-  .feed-hint:hover{color:var(--amber);background:var(--hover)}
-  .feed-mask{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;
-    background:rgba(20,20,20,.42);backdrop-filter:blur(3px);z-index:50;
-    opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s}
-  html[data-theme="night"] .feed-mask{background:rgba(0,0,0,.6)}
-  .feed-mask.on{opacity:1;visibility:visible}
-  .feed-box{position:relative;width:min(320px,100%);border:1px solid var(--line);border-radius:14px;
-    background:var(--card);padding:28px 26px 22px;text-align:center;
-    box-shadow:0 1px 2px rgba(20,20,20,.06),0 18px 48px rgba(20,20,20,.18);
-    transform:translateY(14px) scale(.97);transition:transform .32s cubic-bezier(.22,.61,.36,1)}
-  html[data-theme="night"] .feed-box{box-shadow:0 1px 2px rgba(0,0,0,.5),0 20px 52px rgba(0,0,0,.5)}
-  .feed-mask.on .feed-box{transform:none}
-  .feed-close{position:absolute;top:11px;right:11px;width:28px;height:28px;display:grid;place-items:center;
-    border:1px solid var(--chip);border-radius:50%;background:none;color:var(--muted);cursor:pointer;
-    font-size:15px;line-height:1;transition:color .22s,border-color .22s}
-  .feed-close:hover{color:var(--amber);border-color:var(--amber)}
-  .feed-title{font-size:16.5px;font-weight:600;margin:0 0 5px}
-  .feed-sub{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.05em;margin:0 0 20px}
-  .feed-qr{width:min(200px,72%);aspect-ratio:1/1;margin:0 auto;border:1px solid var(--line);border-radius:10px;
-    background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--muted);overflow:hidden;position:relative}
-  .feed-qr img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none}
-  .feed-qr.has-img img{display:block}
-  .feed-qr.has-img .ph{display:none}
-  .feed-qr .ph{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--muted)}
-  .feed-switch{display:inline-flex;margin:18px auto 0;padding:3px;border:1px solid var(--chip);border-radius:999px;background:var(--bg)}
-  .feed-switch button{appearance:none;display:inline-flex;align-items:center;gap:6px;border:0;background:none;cursor:pointer;
-    padding:6px 14px;border-radius:999px;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.04em;
-    transition:background-color .22s,color .22s}
-  .feed-switch button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-  .feed-switch button.on{background:var(--amber);color:#fff}
-  html[data-theme="night"] .feed-switch button.on{color:#1c1d1f}
+  /* 投喂：功能已下，只留这一句（2026-10-23） */
+  .tip{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px auto 0;width:100%;
+    border:0;background:none;padding:6px 12px;border-radius:999px;line-height:normal;
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--muted)}
+  .tip b{font-weight:600;color:var(--amber)}
 
   /* 「作品」做成入口（不是普通导航文字） */
   .entry{display:inline-flex;align-items:center;gap:14px;margin:34px 0 0;
@@ -224,7 +192,7 @@
         <p class="sub"></p>
         <div class="wire" id="wire"></div>
         <nav class="links" id="links"></nav>
-        <button type="button" class="feed-hint" data-feed>觉得有意思？<b>请小鱼吃 token</b> ♡</button>
+        <p class="tip">觉得有意思？<b>请小鱼吃 token</b> ♡</p>
         <p class="legal" id="legal"></p>
         <div class="card-shine" aria-hidden="true"></div>
           </div>
@@ -241,23 +209,6 @@
   <footer class="site-foot" id="siteFoot" aria-label="备案信息"></footer>
 </div>
 
-
-<!-- 投喂：收款码浮层（单码居中 + 微信/支付宝双图标切换） -->
-<div class="feed-mask" id="feedMask" role="dialog" aria-modal="true" aria-label="投喂">
-  <div class="feed-box">
-    <button type="button" class="feed-close" id="feedClose" aria-label="关闭">×</button>
-    <p class="feed-title">请小鱼吃 token</p>
-    <p class="feed-sub">感谢投喂喵喵喵</p>
-    <div class="feed-qr" id="feedQr">
-      <img id="feedQrImg" alt="收款码">
-      <span class="ph">收款码放这里</span>
-    </div>
-    <div class="feed-switch" id="feedSwitch" role="tablist">
-      <button type="button" data-pay="wx" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5C5.7 5 3 7.3 3 10.2c0 1.6.9 3 2.3 4L4.8 16l2-.9c.7.2 1.4.3 2.2.3h.6"/><path d="M15 9c3 0 5.5 2 5.5 4.6 0 1.5-.9 2.8-2.2 3.6l.5 1.6-1.8-.8c-.6.2-1.3.2-2 .2-3 0-5.5-2-5.5-4.6S12 9 15 9Z"/></svg>微信</button>
-      <button type="button" data-pay="alipay"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M6 14c2.5 1.6 6.5 2 9.5-1M9 8.5h6M12 7v3.5"/></svg>支付宝</button>
-    </div>
-  </div>
-</div>
 
 <script src="site-data.js"></script>
 <script src="render.js"></script>
@@ -508,39 +459,7 @@
     })();
   }
 
-  /* 投喂浮层：点底部话板开，点关闭/遮罩/Esc 关；微信/支付宝切换（真码图 2026-10-22 接入） */
-  (function () {
-    var mask = document.getElementById('feedMask');
-    if (!mask) return;
-    var hint = document.querySelector('.feed-hint');
-    var close = document.getElementById('feedClose');
-    var sw = document.getElementById('feedSwitch');
-    var qrBox = document.getElementById('feedQr');
-    var qrImg = document.getElementById('feedQrImg');
-    var QR = { wx: 'assets/投喂-微信.png?v=2', alipay: 'assets/投喂-支付宝.png?v=2' };
-    var btns = sw ? [].slice.call(sw.querySelectorAll('button')) : [];
-    function showPay(pay) {
-      btns.forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-pay') === pay); });
-      if (qrImg && QR[pay]) { qrImg.src = QR[pay]; qrBox.classList.add('has-img'); }
-    }
-    function currentPay() {
-      for (var i = 0; i < btns.length; i++) {
-        if (btns[i].classList.contains('on')) return btns[i].getAttribute('data-pay');
-      }
-      return 'wx';
-    }
-    var on = function () { mask.classList.add('on'); showPay(currentPay()); };
-    var off = function () { mask.classList.remove('on'); };
-    if (hint) hint.addEventListener('click', on);
-    if (close) close.addEventListener('click', off);
-    mask.addEventListener('click', function (e) { if (e.target === mask) off(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') off(); });
-    btns.forEach(function (b) {
-      b.addEventListener('click', function () { showPay(b.getAttribute('data-pay')); });
-    });
-    var fm = /[?&]feed=(wx|alipay)/.exec(location.search);   /* 截图/自测：?feed=wx|alipay 直接开浮层落码（无头拍不到过渡，冻掉） */
-    if (fm) { mask.style.transition = 'none'; on(); showPay(fm[1]); }
-  })();
+
 </script>
 </body>
 </html>
