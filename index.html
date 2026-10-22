@@ -28,7 +28,7 @@
   /* 主页天气：铅笔雨丝 canvas（铺在内容下面、不挡点击） */
   #rain{position:fixed;inset:0;display:block;z-index:0;pointer-events:none}
   .wrap{position:relative;z-index:1}
-  /* 页面最底部：备案信息（等 ICP 备案号下来再填，不塞进卡片） */
+  /* 页面最底部：备案信息（ICP 备案号 2026-10-22 到手已填，不塞进卡片） */
   .site-foot{position:fixed;left:0;right:0;bottom:0;z-index:2;text-align:center;
     font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;
     padding:10px 16px;pointer-events:none}
@@ -393,6 +393,12 @@
     var legalParts = [esc(fo.copy), esc(fo.site)].filter(Boolean);
     legalParts.push('<a class="ghlink" href="https://github.com/zyx0407" target="_blank" rel="noopener">GitHub ↗</a>');
     legalEl.innerHTML = legalParts.join(' · ');
+  }
+  var footEl = document.getElementById('siteFoot');
+  if (footEl && window.SITE && window.SITE.footer && window.SITE.footer.icp) {
+    var fp = window.SITE.footer;
+    footEl.innerHTML = '<a href="' + (fp.icpUrl || 'https://beian.miit.gov.cn/') +
+      '" target="_blank" rel="noopener">' + esc(fp.icp) + '</a>';
   }
   var av = document.getElementById('avatarBox');
   if (av && home.avatar) { av.style.backgroundImage = 'url(' + home.avatar + ')'; av.style.backgroundSize = 'cover'; }

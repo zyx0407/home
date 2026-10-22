@@ -73,7 +73,9 @@ window.SITE = {
   "footer": {
     "copy": "© 2026 阿玖 · zyx0407",
     "site": "zyx0407.com",
-    "siteUrl": "https://zyx0407.com"
+    "siteUrl": "https://zyx0407.com",
+    "icp": "豫ICP备2026051913号",
+    "icpUrl": "https://beian.miit.gov.cn/"
   },
   "aboutStory": {
     "declaration": "这里是阿玖和他的小鱼",
