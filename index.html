@@ -508,7 +508,7 @@
     })();
   }
 
-  /* 投喂浮层：点底部话板开，点关闭/遮罩/Esc 关；微信/支付宝切换 */
+  /* 投喂浮层：点底部话板开，点关闭/遮罩/Esc 关；微信/支付宝切换（真码图 2026-10-22 接入） */
   (function () {
     var mask = document.getElementById('feedMask');
     if (!mask) return;
@@ -517,22 +517,29 @@
     var sw = document.getElementById('feedSwitch');
     var qrBox = document.getElementById('feedQr');
     var qrImg = document.getElementById('feedQrImg');
-    var on = function () { mask.classList.add('on'); };
+    var QR = { wx: 'assets/投喂-微信.png', alipay: 'assets/投喂-支付宝.png' };
+    var btns = sw ? [].slice.call(sw.querySelectorAll('button')) : [];
+    function showPay(pay) {
+      btns.forEach(function (x) { x.classList.toggle('on', x.getAttribute('data-pay') === pay); });
+      if (qrImg && QR[pay]) { qrImg.src = QR[pay]; qrBox.classList.add('has-img'); }
+    }
+    function currentPay() {
+      for (var i = 0; i < btns.length; i++) {
+        if (btns[i].classList.contains('on')) return btns[i].getAttribute('data-pay');
+      }
+      return 'wx';
+    }
+    var on = function () { mask.classList.add('on'); showPay(currentPay()); };
     var off = function () { mask.classList.remove('on'); };
     if (hint) hint.addEventListener('click', on);
     if (close) close.addEventListener('click', off);
     mask.addEventListener('click', function (e) { if (e.target === mask) off(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') off(); });
-    if (sw) {
-      var btns = sw.querySelectorAll('button');
-      [].forEach.call(btns, function (b) {
-        b.addEventListener('click', function () {
-          [].forEach.call(btns, function (x) { x.classList.remove('on'); });
-          b.classList.add('on');
-          if (qrImg) { qrImg.removeAttribute('src'); qrBox.classList.remove('has-img'); }
-        });
-      });
-    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () { showPay(b.getAttribute('data-pay')); });
+    });
+    var fm = /[?&]feed=(wx|alipay)/.exec(location.search);   /* 截图/自测：?feed=wx|alipay 直接开浮层落码（无头拍不到过渡，冻掉） */
+    if (fm) { mask.style.transition = 'none'; on(); showPay(fm[1]); }
   })();
 </script>
 </body>
