@@ -24,14 +24,14 @@
 <script src="assets/平滑滚动.js" defer></script>
 <style>
   /* 主页专用（通用部分在共享的 style.css 里） */
-  body{min-height:100vh;overflow-x:hidden}
+  body{min-height:100vh;min-height:100dvh;overflow-x:hidden}
   /* 主页天气：铅笔雨丝 canvas（铺在内容下面、不挡点击） */
   #rain{position:fixed;inset:0;display:block;z-index:0;pointer-events:none}
   .wrap{position:relative;z-index:1}
   /* 页面最底部：备案信息（ICP 备案号 2026-10-22 到手已填，不塞进卡片） */
   .site-foot{position:fixed;left:0;right:0;bottom:0;z-index:2;display:block;text-align:center;
     font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;
-    padding:10px 16px;pointer-events:none}
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));pointer-events:none}
   .site-foot a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;pointer-events:auto}
   .site-foot a:hover{color:var(--amber);border-color:var(--amber-soft)}
   /* 3D 卡片：正面＝门面，背面＝实体卡卡背（2026-10-17） */
@@ -62,7 +62,7 @@
   .name{font-size:29px;letter-spacing:.02em;margin:0 0 10px}
   .tag,.sub{font-size:14.5px;color:var(--muted);margin:0 auto;max-width:33em;line-height:1.9}
   .links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 16px}
-  @media (max-width:430px){.links{grid-template-columns:repeat(2,1fr);gap:8px}}
+  @media (max-width:430px){.links{gap:8px}.sub{font-size:13px}.legal{font-size:10px;letter-spacing:.02em;column-gap:12px}.legal .sep{display:none}}
   .lnk{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--chip);border-radius:999px;
     padding:6px 0;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);
     min-width:0;white-space:nowrap;overflow:hidden;
@@ -81,7 +81,10 @@
   }
   .lnk.soon:hover{border-color:var(--chip);color:var(--muted);background:none}
   .lnk svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
-  .legal{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em;margin:0}
+  .legal{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em;margin:0;
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline}
+  .legal .lp{white-space:nowrap}
+  .legal .sep{white-space:pre}
   /* 投喂：功能已下，只留这一句（2026-10-23） */
   .tip{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px auto 0;width:100%;
     border:0;background:none;padding:6px 12px;border-radius:999px;line-height:normal;
@@ -118,7 +121,7 @@
   /* 主题按钮收进卡片右上角：平时淡，鼠标进卡片才亮；GitHub 小钮并排 */
   .card .tools{position:absolute;top:12px;right:12px;opacity:.45;transition:opacity .25s ease;display:flex;align-items:center;gap:6px}
   .card:hover .tools,.card .tools:focus-within{opacity:1}
-  .legal a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:color .22s,border-color .22s}
+  .legal a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:color .22s,border-color .22s;white-space:nowrap}
   .legal a:hover{color:var(--amber);border-color:var(--amber-soft)}
   .avatar{width:88px;height:88px;margin:0 auto 16px;border-radius:50%;border:1px solid var(--line-strong);
     display:flex;align-items:center;justify-content:center;background:var(--bg);overflow:hidden}
@@ -337,13 +340,17 @@
         (soon ? ' title="待定"' : (l.href.charAt(0) === 'h' ? ' target="_blank" rel="noopener"' : '')) +
         ' class="lnk' + (soon ? ' soon' : '') + '">' + (ICON[l.icon] || ICON.link) + esc(l.label) + '</' + (soon ? 'span' : 'a') + '>';
     }).join('');
+    /* 胶囊按条数分列（作品页下架后只剩 2 颗；以后加也自动排） */
+    var nLnk = (home.links || []).length;
+    if (nLnk) linksEl.style.gridTemplateColumns = 'repeat(' + nLnk + ',minmax(0,1fr))';
   }
   var legalEl = document.getElementById('legal');
   if (legalEl) {
     var fo = (window.SITE && window.SITE.footer) || {};
     var legalParts = [esc(fo.copy), esc(fo.site)].filter(Boolean);
     legalParts.push('<a class="ghlink" href="https://github.com/zyx0407" target="_blank" rel="noopener">GitHub ↗</a>');
-    legalEl.innerHTML = legalParts.join(' · ');
+    legalEl.innerHTML = legalParts.map(function (p) { return '<span class="lp">' + p + '</span>'; })
+      .join('<span class="sep"> · </span>');
   }
   var footEl = document.getElementById('siteFoot');
   if (footEl && window.SITE && window.SITE.footer && window.SITE.footer.icp) {
@@ -399,7 +406,7 @@
       draw();
     }
     inner.addEventListener('pointerdown', function (e) {
-      if (e.target.closest && e.target.closest('a,button,input,textarea,select')) return;
+      if (e.target.closest && e.target.closest('a,button,input,textarea,select,#mark,.avatar')) return;
       e.preventDefault();                 /* 阻止选字 / 原生拖拽 / 拖出开新页 */
       dragging = true; moved = false;
       txA = ax; txY = ay;
