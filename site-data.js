@@ -29,14 +29,14 @@ window.SITE = {
         "icon": "about"
       },
       {
-        "label": "互动",
-        "href": "",
-        "icon": "msg"
-      },
-      {
         "label": "作品",
         "href": "",
         "icon": "works"
+      },
+      {
+        "label": "友链",
+        "href": "",
+        "icon": "link"
       }
     ],
     "mailText": ""
