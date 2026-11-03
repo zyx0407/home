@@ -129,12 +129,13 @@
   .card-front{display:flex;flex-direction:column;align-items:center}
   .card-front .links{width:100%}
   .card-front .tip{margin-top:auto}
-  /* 角落小猫（2026-11-04 他选 C）：像素图是黑底白线——夜里 screen 融掉黑底只留白线，
-     白天先 invert 成白底黑线再 multiply 融进纸面；不接指针，纯装饰 */
+  /* 角落小猫（2026-11-04 他选 C；同日改透明底两版——混合模式把细笔画稀释成灰，白天看不清）：
+     昼/夜各一张 RGBA 素材（墨色／白墨），直接铺，不做 filter、不做 blend */
   .corner-cat{position:absolute;right:22px;bottom:16px;width:56px;height:56px;object-fit:contain;
-    opacity:.85;pointer-events:none;image-rendering:pixelated;
-    filter:invert(1);mix-blend-mode:multiply}
-  html[data-theme="night"] .corner-cat{filter:none;mix-blend-mode:screen;opacity:.9}
+    pointer-events:none;image-rendering:pixelated;display:block}
+  .corner-cat-night{display:none}
+  html[data-theme="night"] .corner-cat-day{display:none}
+  html[data-theme="night"] .corner-cat-night{display:block}
   html[data-theme="night"] .card{box-shadow:0 1px 2px rgba(0,0,0,.5),0 18px 48px rgba(0,0,0,.45)}
   /* 主题按钮收进卡片右上角：平时淡，鼠标进卡片才亮；GitHub 小钮并排 */
   .card .tools{position:absolute;top:12px;right:12px;opacity:.45;transition:opacity .25s ease;display:flex;align-items:center;gap:6px}
@@ -216,7 +217,7 @@
         <nav class="links" id="links"></nav>
         <p class="tip">觉得有意思？<b>请小鱼吃 token</b> ♡</p>
         <p class="legal" id="legal"></p>
-        <img class="corner-cat" src="assets/困困猫-走.png" alt="" aria-hidden="true" width="512" height="512">
+        <img class="corner-cat corner-cat-day" src="assets/困困猫-昼.png" alt="" aria-hidden="true" width="256" height="256"><img class="corner-cat corner-cat-night" src="assets/困困猫-夜.png" alt="" aria-hidden="true" width="256" height="256">
         <div class="card-shine" aria-hidden="true"></div>
           </div>
           <div class="card card-back" aria-hidden="true">  <img class="back-img back-day" src="assets/卡背-昼.png" alt="">
