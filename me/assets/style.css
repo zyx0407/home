@@ -1250,3 +1250,7 @@ html[data-theme="night"] .topbar .nav,
   .foot .inner{gap:8px 0;justify-content:center}
   .foot .inner > .sep{margin:0 12px}
 }
+/* ============ 背景雨（2026-11-04 接入，沿用门面站 雨.js） ============ */
+#rain{position:fixed;inset:0;display:block;z-index:0;pointer-events:none}
+html{background:var(--bg)}
+@media (prefers-reduced-motion:reduce){ #rain{display:none!important} }
