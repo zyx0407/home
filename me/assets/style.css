@@ -1306,3 +1306,8 @@ html{background:var(--bg)}
 @media (max-width:760px){
   .rowlink{grid-template-areas:"date date" "title arrow" "desc desc";row-gap:4px}
 }
+/* 友链申请块（2026-11-04） */
+.apply{padding:26px 0 6px;max-width:36em}
+.apply p{margin:0 0 10px;font:400 15px/1.9 var(--sans);color:var(--ink)}
+.apply .apply-sub{margin:0 0 18px;font:400 13px/1.8 var(--sans);color:var(--muted)}
+.apply-icons{margin:0}
