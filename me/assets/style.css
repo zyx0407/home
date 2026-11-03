@@ -1265,3 +1265,9 @@ html{background:var(--bg)}
    雨留在 0 层，内容整体抬到 1 层——卡片有底色会盖住雨，只有页面空白处看得见雨 */
 #rain{z-index:0 !important}
 .main,.foot{position:relative;z-index:1}
+/* 单篇日期行（2026-11-04 他问时间放哪）：标题下、细线上，小号等宽 */
+.prose .pdate{margin:16px 0 0;font:400 11.5px/1 var(--mono);letter-spacing:.14em;color:var(--muted)}
+.prose .pdate+*{margin-top:22px}
+/* 阅读数（2026-11-04 接自建接口；取不到就显示 —，不打断页面） */
+.vn{font:400 11.5px/1 var(--mono);letter-spacing:.04em;color:var(--muted);font-style:normal}
+.prose .pdate .vsep{margin:0 8px;opacity:.5}
