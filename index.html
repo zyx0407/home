@@ -434,6 +434,7 @@
     }
     var coarse = !!(window.matchMedia && window.matchMedia('(hover:none), (pointer:coarse)').matches);
     if (!coarse) inner.addEventListener('pointerdown', function (e) {
+      if (e.target.closest && e.target.closest('a,button,input,textarea,select,.tip,.tip-qr')) return;
       if (e.target.closest && e.target.closest('a,button,input,textarea,select,#mark,.avatar')) return;
       e.preventDefault();                 /* 阻止选字 / 原生拖拽 / 拖出开新页 */
       dragging = true; moved = false;
@@ -462,7 +463,10 @@
       if (moved) snap(); else flipOnce();
     }
     if (!coarse) {
-      inner.addEventListener('pointerup', endDrag);
+      inner.addEventListener('pointerup', function (e) {
+      if (e.target.closest && e.target.closest('a,button,input,textarea,select,.tip,.tip-qr')) return;
+      endDrag(e);
+    });
       inner.addEventListener('pointercancel', endDrag);
       inner.style.cursor = 'grab';
     } else {
@@ -538,6 +542,8 @@
   if (!btn || !layer) return;
   function show() { layer.hidden = false; }
   function hide() { layer.hidden = true; }
+  btn.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+  btn.addEventListener('pointerup', function (e) { e.stopPropagation(); });
   btn.addEventListener('click', function (e) { e.stopPropagation(); show(); });
   close.addEventListener('click', hide);
   layer.addEventListener('click', function (e) { if (e.target === layer) hide(); });
