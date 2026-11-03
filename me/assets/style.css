@@ -1089,3 +1089,19 @@ html[data-theme="night"] .pbyline .pav .cv-night{display:block}
   .gcard{padding:9px 9px 0;border-radius:15px}
   .gbody{padding:13px 5px 15px}
 }
+/* ============ 顶栏 v5：导航与日夜钮并进同一枚胶囊（2026-11-04 他「还是有点丑」） ============ */
+.navwrap{display:flex;align-items:center;gap:2px;margin-left:auto;padding:5px 5px 5px 6px;
+  border:1px solid var(--line);border-radius:999px;background:var(--card);
+  box-shadow:0 8px 22px rgba(20,20,20,.06)}
+html[data-theme="night"] .navwrap{box-shadow:0 8px 22px rgba(0,0,0,.4)}
+.navwrap .nav{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;margin:0;gap:2px}
+.navwrap .theme-btn{width:30px;height:30px;border:0;background:transparent;box-shadow:none;margin-left:4px;
+  color:var(--muted)}
+.navwrap .theme-btn:hover{color:var(--amber);background:var(--hover)}
+@media (max-width:760px){
+  .navwrap{width:100%;margin:0;padding:5px;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start}
+  .navwrap .theme-btn{margin-left:auto;flex:none}
+}
+/* 修正：navwrap 加了包裹层后丢失 order，导致品牌与导航左右互换 */
+.topbar .row > .brand{order:1}
+.topbar .row > .navwrap{order:2}
