@@ -1037,3 +1037,6 @@ body.home .main{padding-top:126px}
   .pagehead .sign{font-size:14px}
   .pagehead .sign-en{font-size:10.5px}
 }
+
+/* 小鱼那句话（2026-11-04 他让补「你是什么」） */
+.pnote{margin:9px 0 0;font:italic 12.5px/1.8 var(--note);color:var(--muted);letter-spacing:.02em}
