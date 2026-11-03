@@ -1207,3 +1207,13 @@ html[data-theme="night"] .topbar{
 /* 顶栏 v13（2026-11-04 他点明：她右侧有栏所以顶栏比内容短；我们没侧栏，顶栏就该短于内容）：900 */
 .topbar{width:min(900px, calc(100% - 48px))}
 @media (max-width:760px){ .topbar{width:calc(100% - 20px)} }
+/* 顶栏 v14（2026-11-04 他「不要里面的胶囊样式」）：品牌与导航组不再有独立底色/描边/投影，只在条上排字 */
+.topbar .brand,.topbar .navwrap{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+.topbar .brand{padding:0 !important}
+.topbar .navwrap{padding:0 !important;margin-left:auto !important}
+.topbar .nav a.on{background:transparent !important;color:var(--ink);border-bottom:1px solid var(--amber)}
+.topbar .navwrap .theme-btn{background:transparent !important;border:0 !important;box-shadow:none !important}
