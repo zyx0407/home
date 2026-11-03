@@ -11,3 +11,6 @@ edit-about.js
 back/
 go/
 _写作模板/
+
+# 本机工具（不进仓库）
+_tools/
