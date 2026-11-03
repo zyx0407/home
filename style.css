@@ -198,3 +198,8 @@
 /* 手机端小字（2026-11-04）：门面卡缩放后法务/链接字太小，底字抬一档（卡比例不变） */
 .legal{font-size:12.5px}
 .links .lnk{font-size:12.5px}
+/* 投喂语悬停更明显（2026-11-04）：底色微亮 + 下划线显形 */
+.tip.is-btn{
+  border-radius:7px;padding:2px 7px;margin:0 -7px;
+}
+.tip.is-btn:hover{background:var(--hover);text-decoration-color:var(--amber)}
