@@ -1235,3 +1235,18 @@ html[data-theme="night"] .topbar .nav,
   background:transparent !important;
 }
 .topbar .nav a.on{border-bottom:1px solid var(--amber) !important}
+/* 页脚 v2（2026-11-04 他「居中分布」）：三组等距居中铺开 */
+.foot .inner{
+  justify-content:center;
+  gap:10px 0;
+  text-align:center;
+}
+.foot .inner > span,
+.foot .inner > a{ white-space:nowrap }
+.foot .inner > .sep{ margin:0 clamp(14px,3vw,42px) }
+.foot .inner > span:first-child,
+.foot .inner > a{ margin:0 }
+@media (max-width:760px){
+  .foot .inner{gap:8px 0;justify-content:center}
+  .foot .inner > .sep{margin:0 12px}
+}
