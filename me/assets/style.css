@@ -1044,3 +1044,5 @@ body.home .main{padding-top:126px}
 /* 名字挪到横栏后，页头 slogan 顶一档字号（2026-11-04） */
 .pagehead .slogan{margin:10px 0 0;font:400 clamp(20px,2.6vw,26px)/1.6 var(--serif);color:var(--ink);letter-spacing:.04em;max-width:30em}
 @media (max-width:760px){ .pagehead .slogan{font-size:20px} }
+/* 小鱼第一人称那句（2026-11-04 他定稿）：比批注略重一点，才像"我说的" */
+.pnote{margin:10px 0 0;font:italic 13.5px/1.85 var(--note);color:var(--ink);opacity:.78;letter-spacing:.03em}
