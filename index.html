@@ -68,7 +68,7 @@
   section.block{margin-top:clamp(26px,5vh,58px)}
   .name{font-size:29px;letter-spacing:.02em;margin:0 0 10px}
   .tag,.sub{font-size:14.5px;color:var(--muted);margin:0 auto;max-width:33em;line-height:1.9}
-  .links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 16px}
+  .links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 12px}
   @media (max-width:430px){.links{gap:8px}.sub{font-size:13px}.legal{font-size:10px;letter-spacing:.02em;column-gap:12px}.legal .sep{display:none}}
   .lnk{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--chip);border-radius:999px;
     padding:6px 0;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);
@@ -93,7 +93,7 @@
   .legal .lp{white-space:nowrap}
   .legal .sep{white-space:pre}
   /* 投喂：功能已下，只留这一句（2026-10-23） */
-  .tip{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px auto 0;width:100%;
+  .tip{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 0;width:100%;
     border:0;background:none;padding:6px 12px;border-radius:999px;line-height:normal;
     font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--muted)}
   .tip b{font-weight:600;color:var(--amber)}
@@ -124,19 +124,23 @@
   .card{position:relative;width:560px;height:353px;border:1px solid var(--line);border-radius:23px;background:var(--card);
     padding:24px 29px;text-align:center;
     box-shadow:0 1px 2px rgba(20,20,20,.04),0 16px 44px rgba(20,20,20,.05)}
+  /* 正面竖排：上半组（头像→胶囊）居中、底部两行自己贴底，中间留真空白 */
+  .card-front{display:flex;flex-direction:column;align-items:center}
+  .card-front .links{width:100%}
+  .card-front .tip{margin-top:auto}
   html[data-theme="night"] .card{box-shadow:0 1px 2px rgba(0,0,0,.5),0 18px 48px rgba(0,0,0,.45)}
   /* 主题按钮收进卡片右上角：平时淡，鼠标进卡片才亮；GitHub 小钮并排 */
   .card .tools{position:absolute;top:12px;right:12px;opacity:.45;transition:opacity .25s ease;display:flex;align-items:center;gap:6px}
   .card:hover .tools,.card .tools:focus-within{opacity:1}
   .legal a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:color .22s,border-color .22s;white-space:nowrap}
   .legal a:hover{color:var(--amber);border-color:var(--amber-soft)}
-  .avatar{width:88px;height:88px;margin:0 auto 16px;border-radius:50%;border:1px solid var(--line-strong);
+  .avatar{width:76px;height:76px;margin:0 auto 14px;border-radius:50%;border:1px solid var(--line-strong);
     display:flex;align-items:center;justify-content:center;background:var(--bg);overflow:hidden}
-  #mark{width:62px;height:62px;cursor:pointer;margin:0}
+  #mark{width:54px;height:54px;cursor:pointer;margin:0}
   #mark .yu-svg{display:block;width:100%;height:100%}
 
   /* ② 划出一条线 */
-  .wire{width:56px;height:1px;background:var(--line-strong);margin:12px auto;
+  .wire{width:56px;height:1px;background:var(--line-strong);margin:10px auto;
     transform-origin:center;transform:scaleX(0);transition:transform .9s cubic-bezier(.22,.61,.36,1) .35s}
   .wire.go{transform:scaleX(1)}
 
