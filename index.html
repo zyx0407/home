@@ -70,7 +70,7 @@
   .name{font-size:29px;letter-spacing:.02em;margin:0 0 10px}
   .tag,.sub{font-size:14.5px;color:var(--muted);margin:0 auto;max-width:33em;line-height:1.9}
   .links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 0 16px}
-  @media (max-width:430px){.links{gap:8px}.sub{font-size:13px}.legal{font-size:10px;letter-spacing:.02em;column-gap:12px}.legal .sep{display:none}}
+  @media (max-width:430px){.links{gap:8px}.sub{font-size:13px}.legal{font-size:11px;letter-spacing:.02em;column-gap:12px}.legal .sep{display:none}}
   .lnk{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--chip);border-radius:999px;
     padding:6px 0;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);
     min-width:0;white-space:nowrap;overflow:hidden;
@@ -89,7 +89,7 @@
   }
   .lnk.soon:hover{border-color:var(--chip);color:var(--muted);background:none}
   .lnk svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
-  .legal{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em;margin:0;
+  .legal{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.05em;margin:0;
     display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline}
   .legal .lp{white-space:nowrap}
   .legal .sep{white-space:pre}
@@ -215,8 +215,7 @@
         <p class="sub"></p>
         <div class="wire" id="wire"></div>
         <nav class="links" id="links"></nav>
-        <p class="tip">觉得有意思？<b>请小鱼吃 token</b> ♡</p>
-        <button class="tip-qr" id="tipQrBtn" type="button" aria-label="赞赏码"><img src="assets/赞赏码.png" alt="赞赏码"><span>扫一扫</span></button>
+        <button class="tip is-btn" id="tipQrBtn" type="button" aria-label="赞赏码">觉得有意思？<b>请小鱼吃 token</b> ♡</button>
         <p class="legal" id="legal"></p>
         <img class="corner-cat corner-cat-day" src="assets/困困猫-昼.png" alt="" aria-hidden="true" width="256" height="256"><img class="corner-cat corner-cat-night" src="assets/困困猫-夜.png" alt="" aria-hidden="true" width="256" height="256">
         <div class="card-shine" aria-hidden="true"></div>

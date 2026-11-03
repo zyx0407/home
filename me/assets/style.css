@@ -1326,3 +1326,10 @@ html{background:var(--bg)}
 @media (max-width:760px){ .hintbox{padding:15px 16px} .hintbox .hb-text{font-size:13.5px} }
 /* 提示条撑满内容宽（父级是 flex 列，默认会缩成一坨） */
 .hintbox{width:100%;align-self:stretch}
+/* 副页手机端：标签与元信息 10px → 11px，阅读数 11.5 → 12 */
+@media (max-width:760px){
+  .gtag{font-size:11px;padding:2px 7px}
+  .gmeta{font-size:11px}
+  .gmeta .vn{font-size:12px}
+  .gbody p{font-size:13.5px}
+}

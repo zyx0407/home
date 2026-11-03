@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>找不到这一页 · 阿玖</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="stylesheet" href="/me/assets/style.css">
+<script src="/me/assets/theme.js"></script>
+<style>
+  .nf{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:0 24px}
+  .nf .box{max-width:34em;text-align:center}
+  .nf .kicker{font:400 11.5px/1 var(--mono);letter-spacing:.18em;color:var(--muted);margin:0 0 22px;text-transform:uppercase}
+  .nf h1{margin:0 0 18px;font:600 clamp(30px,5vw,44px)/1.2 var(--serif);letter-spacing:.04em}
+  .nf p{margin:0 0 30px;font:400 15px/1.9 var(--sans);color:var(--muted)}
+  .nf .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .nf .acts a{padding:9px 18px;border:1px solid var(--line);border-radius:999px;text-decoration:none;
+    color:var(--ink);font:400 12.5px/1 var(--mono);letter-spacing:.06em;transition:border-color .16s,color .16s}
+  .nf .acts a:hover{border-color:var(--line-strong);color:var(--amber)}
+  .nf .fish{width:72px;height:72px;margin:0 auto 24px;opacity:.18}
+</style>
+</head>
+<body>
+<canvas id="rain" aria-hidden="true"></canvas>
+
+<main class="nf">
+  <div class="box">
+    <img class="fish" src="/me/assets/鱼-黑墨.svg" alt="">
+    <p class="kicker">404</p>
+    <h1>这页不在了</h1>
+    <p>可能是地址写错，也可能是我改版时把它挪走了。<br>雨还在下，先去别处看看。</p>
+    <div class="acts">
+      <a href="/">回门面</a>
+      <a href="/me/">副页首页</a>
+      <a href="/me/about.html">个人</a>
+      <a href="/me/work.html">作品</a>
+    </div>
+  </div>
+</main>
+
+<script src="/me/assets/雨.js"></script>
+</body>
+</html>
