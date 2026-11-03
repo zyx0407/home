@@ -1271,3 +1271,9 @@ html{background:var(--bg)}
 /* 阅读数（2026-11-04 接自建接口；取不到就显示 —，不打断页面） */
 .vn{font:400 11.5px/1 var(--mono);letter-spacing:.04em;color:var(--muted);font-style:normal}
 .prose .pdate .vsep{margin:0 8px;opacity:.5}
+/* 友链空态（2026-11-04 页重构） */
+.empty-note{padding:26px 0 10px;max-width:34em}
+.empty-note p{margin:0 0 10px;font:400 15px/1.9 var(--sans);color:var(--muted)}
+.empty-note .hint{font:italic 12.5px/1.8 var(--note);color:var(--muted);opacity:.8}
+/* 个人页信息卡沿用 .profile/.pcard，只需上边距 */
+.profile{margin-top:6px}
