@@ -25,17 +25,17 @@ window.SITE = {
     "links": [
       {
         "label": "关于",
-        "href": "about/",
+        "href": "",
         "icon": "about"
       },
       {
         "label": "互动",
-        "href": "notes/",
+        "href": "",
         "icon": "msg"
       },
       {
         "label": "作品",
-        "href": "work/",
+        "href": "",
         "icon": "works"
       }
     ],
@@ -88,7 +88,9 @@ window.SITE = {
     "site": "zyx0407.com",
     "siteUrl": "https://zyx0407.com",
     "icp": "豫ICP备2026051913号",
-    "icpUrl": "https://beian.miit.gov.cn/"
+    "icpUrl": "https://beian.miit.gov.cn/",
+    "mps": "豫公网安备41072602000496号",
+    "mpsUrl": "https://beian.mps.gov.cn/#/query/webSearch?code=41072602000496"
   },
   "aboutStory": {
     "declaration": "这里是阿玖和他的小鱼",
