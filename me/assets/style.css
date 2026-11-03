@@ -1277,3 +1277,32 @@ html{background:var(--bg)}
 .empty-note .hint{font:italic 12.5px/1.8 var(--note);color:var(--muted);opacity:.8}
 /* 个人页信息卡沿用 .profile/.pcard，只需上边距 */
 .profile{margin-top:6px}
+/* 首页三块「最新内容」行（2026-11-04） */
+.rowlink{
+  display:grid;grid-template-columns:88px minmax(120px,auto) 1fr 24px;
+  align-items:baseline;gap:16px;padding:14px 6px;border-bottom:1px solid var(--line);
+  text-decoration:none;color:var(--ink);transition:background .16s,border-color .16s;
+}
+.rowlink:hover{background:var(--hover);border-bottom-color:var(--line-strong)}
+.rowlink .rl-date{font:400 11px/1.4 var(--mono);letter-spacing:.06em;color:var(--muted)}
+.rowlink .rl-title{font:500 15.5px/1.5 var(--serif);letter-spacing:.02em}
+.rowlink .rl-desc{font:400 13px/1.7 var(--sans);color:var(--muted)}
+.rowlink .rl-arrow{font:400 13px/1 var(--mono);color:var(--muted);text-align:right}
+.rowlink:hover .rl-arrow{color:var(--amber)}
+.rowlink.empty{cursor:default}
+.rowlink.empty:hover{background:transparent;border-bottom-color:var(--line)}
+@media (max-width:760px){
+  .rowlink{grid-template-columns:1fr 20px;grid-template-areas:"title arrow" "desc desc" "date date";
+    row-gap:6px;padding:14px 4px}
+  .rowlink .rl-title{grid-area:title}
+  .rowlink .rl-arrow{grid-area:arrow}
+  .rowlink .rl-desc{grid-area:desc}
+  .rowlink .rl-date{grid-area:date}
+}
+/* 首页行：列宽固定一点，描述列对齐 */
+.rowlink{grid-template-columns:84px 150px 1fr 24px}
+@media (max-width:760px){ .rowlink{grid-template-columns:1fr 20px} }
+/* 手机端行内顺序：日期在上、标题、摘要 */
+@media (max-width:760px){
+  .rowlink{grid-template-areas:"date date" "title arrow" "desc desc";row-gap:4px}
+}
