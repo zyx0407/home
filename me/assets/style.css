@@ -1311,3 +1311,18 @@ html{background:var(--bg)}
 .apply p{margin:0 0 10px;font:400 15px/1.9 var(--sans);color:var(--ink)}
 .apply .apply-sub{margin:0 0 18px;font:400 13px/1.8 var(--sans);color:var(--muted)}
 .apply-icons{margin:0}
+/* 提示条（2026-11-04）：友链这类"还没内容"的位置不用卡片，用一条提示 */
+.hintbox{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin:2px 0 0;padding:18px 20px;border:1px solid var(--line);border-radius:14px;
+  background:var(--card);text-decoration:none;color:var(--ink);
+  transition:border-color .16s,background .16s;
+}
+.hintbox:hover{border-color:var(--line-strong);background:var(--hover)}
+.hintbox .hb-text{font:400 14.5px/1.7 var(--sans);color:var(--muted)}
+.hintbox:hover .hb-text{color:var(--ink)}
+.hintbox .hb-arrow{font:400 13px/1 var(--mono);color:var(--muted)}
+.hintbox:hover .hb-arrow{color:var(--amber)}
+@media (max-width:760px){ .hintbox{padding:15px 16px} .hintbox .hb-text{font-size:13.5px} }
+/* 提示条撑满内容宽（父级是 flex 列，默认会缩成一坨） */
+.hintbox{width:100%;align-self:stretch}
