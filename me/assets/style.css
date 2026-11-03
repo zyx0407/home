@@ -1254,3 +1254,14 @@ html[data-theme="night"] .topbar .nav,
 #rain{position:fixed;inset:0;display:block;z-index:0;pointer-events:none}
 html{background:var(--bg)}
 @media (prefers-reduced-motion:reduce){ #rain{display:none!important} }
+/* 雨修正（2026-11-04 他：雨是背景，要在最底层）：z-index 改 -1，落到内容之下、纸面之上 */
+#rain{
+  position:fixed; inset:0; display:block;
+  z-index:-1 !important;
+  pointer-events:none;
+  opacity:1;
+}
+/* 雨修正 v2（2026-11-04）：z-index:-1 会被 body 背景吃掉，改为
+   雨留在 0 层，内容整体抬到 1 层——卡片有底色会盖住雨，只有页面空白处看得见雨 */
+#rain{z-index:0 !important}
+.main,.foot{position:relative;z-index:1}
