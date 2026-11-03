@@ -1030,3 +1030,10 @@ body.home .main{padding-top:126px}
   .pagehead .slogan{font-size:14px;line-height:1.85}
   .profile{margin-top:22px}
 }
+/* ============ 签名句（2026-11-04 他喜欢的那句） ============ */
+.pagehead .sign{margin:18px 0 0;font:italic 15px/1.6 var(--note);color:var(--ink);opacity:.72;letter-spacing:.04em}
+.pagehead .sign-en{margin:6px 0 0;font:400 11.5px/1.5 var(--mono);color:var(--muted);letter-spacing:.05em}
+@media (max-width:760px){
+  .pagehead .sign{font-size:14px}
+  .pagehead .sign-en{font-size:10.5px}
+}
