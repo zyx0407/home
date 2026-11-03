@@ -1227,3 +1227,11 @@ html[data-theme="night"] .topbar .nav,
   padding:0 !important;
   border-radius:0 !important;
 }
+/* 顶栏 v16（2026-11-04 他「琥珀亮一整圈」）：链接继承的 999px 圆角让 1px 下划线顺着圆角拐上去，
+   看起来像半圈光环；改成直角，下划线就是一条直线 */
+.topbar .nav a,
+.topbar .nav a.on{
+  border-radius:0 !important;
+  background:transparent !important;
+}
+.topbar .nav a.on{border-bottom:1px solid var(--amber) !important}
