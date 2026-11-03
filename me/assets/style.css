@@ -1074,3 +1074,18 @@ html[data-theme="night"] .prose .phero .cv-night{display:block}
 html[data-theme="night"] .pbyline .pav .cv-day{display:none}
 html[data-theme="night"] .pbyline .pav .cv-night{display:block}
 .pnote{white-space:normal}
+/* ============ 卡片 v2（2026-11-04 他「方块大小参考人家的」）：封面内缩圆角、卡更厚、元信息沉底 ============ */
+.grid3{gap:22px}
+.gcard{padding:11px 11px 0;border-radius:18px;display:flex;flex-direction:column;overflow:hidden}
+.gcover{aspect-ratio:16/10;border:1px solid var(--line);border-radius:12px;overflow:hidden;border-bottom:1px solid var(--line)}
+.gbody{padding:15px 7px 17px;display:flex;flex-direction:column;flex:1}
+.gbody h3{font-size:18px;line-height:1.5}
+.gbody p{margin-top:9px;font-size:13px;line-height:1.75}
+.gtag{margin-top:13px;align-self:flex-start}
+.gmeta{margin-top:auto;padding-top:13px;border-top:1px solid var(--line)}
+.gcard:hover .gcover{border-color:var(--amber-soft)}
+@media (max-width:760px){
+  .grid3{gap:16px}
+  .gcard{padding:9px 9px 0;border-radius:15px}
+  .gbody{padding:13px 5px 15px}
+}
