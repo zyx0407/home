@@ -25,7 +25,7 @@ window.SITE = {
     "links": [
       {
         "label": "关于",
-        "href": "",
+        "href": "me/",
         "icon": "about"
       },
       {

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>这站是怎么重构的 · 阿玖</title>
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/favicon-180.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="row">
+    <a class="brand" href="../index.html">阿玖</a>
+    <nav class="nav">
+      <a href="../index.html">首页</a>
+      <a href="../essays.html" class="on">随笔</a>
+      <a href="../photos.html">照片</a>
+      <a href="../work.html">作品</a>
+      <a href="../guestbook.html">留言</a>
+      <a href="../about.html">关于</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="切换主题">
+      <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/></svg>
+      <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M20.4 14.2A8.5 8.5 0 0 1 9.8 3.6a8.5 8.5 0 1 0 10.6 10.6Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="main">
+  <article class="prose">
+
+    <p class="meta"><span class="d">2026-10-23</span> · 随笔</p>
+    <h1>这站是怎么重构的</h1>
+    <p class="lede">从一张名片到两张页，再到能长文章——这轮改了什么、为什么。</p>
+
+    <div>
+      <p>这站换了骨架。不是换皮：以前一张名片吃天下，现在是两页——首页还是那张名片，往下滑进正文页。</p>
+
+      <h2>这轮做了什么</h2>
+      <ul>
+        <li>首页三颗胶囊撤了，卡面尺寸一像素没动（560×388）。</li>
+        <li>加了一段一秒钟的开场：卡片从下方升起、淡入，雨同步渐显。</li>
+        <li>正文页照着 mmguo.dev 的结构重排：编号分节、细线、条目列表；页面上只有字和留白。</li>
+      </ul>
+
+      <h2>为什么</h2>
+      <p>原来的关于页和互动页是空壳，点进去只有一句「施工中」。与其让访客扑空，不如把内容收到一页里，再让这一页能长出文章。</p>
+
+      <h2>接下来</h2>
+      <p>文章区先搭生成器：本地写 Markdown，跑一次 <code>node build.mjs</code>，生成静态页和索引；运行时还是纯静态、零依赖。写一篇生成一篇，不碰别的地方。</p>
+    </div>
+
+    <p class="back">← <a href="../essays.html">回随笔</a></p>
+
+  </article>
+</main>
+
+<footer class="foot">
+  <div class="inner">
+    <span>© 2026 阿玖 · zyx0407</span>
+    <span class="sep">·</span>
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">豫ICP备2026051913号</a>
+    <span class="sep">·</span>
+    <a href="https://beian.mps.gov.cn/" target="_blank" rel="noopener">豫公网安备41072602000496号</a>
+  </div>
+</footer>
+
+<script src="../assets/theme.js"></script>
+</body>
+</html>
