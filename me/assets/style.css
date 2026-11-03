@@ -1040,3 +1040,7 @@ body.home .main{padding-top:126px}
 
 /* 小鱼那句话（2026-11-04 他让补「你是什么」） */
 .pnote{margin:9px 0 0;font:italic 12.5px/1.8 var(--note);color:var(--muted);letter-spacing:.02em}
+
+/* 名字挪到横栏后，页头 slogan 顶一档字号（2026-11-04） */
+.pagehead .slogan{margin:10px 0 0;font:400 clamp(20px,2.6vw,26px)/1.6 var(--serif);color:var(--ink);letter-spacing:.04em;max-width:30em}
+@media (max-width:760px){ .pagehead .slogan{font-size:20px} }
