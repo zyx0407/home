@@ -1014,3 +1014,19 @@ html[data-theme="night"] .theme-btn{box-shadow:0 8px 22px rgba(0,0,0,.4)}
   .topbar .nav{width:100% !important;margin-left:0 !important;overflow-x:auto}
   .topbar .nav a{padding:5px 10px !important}
 }
+/* ============ 页头（2026-11-04 他「横幅不要了」：去掉大横幅，留轻页头） ============ */
+body.home .main{padding-top:126px}
+.pagehead{padding:0 0 6px}
+.pagehead .wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+.pagehead .kicker{font:400 11.5px/1 var(--mono);letter-spacing:.2em;color:var(--muted);
+  margin:0 0 16px;text-transform:uppercase}
+.pagehead h1{margin:0;font:600 clamp(38px,5vw,56px)/1.05 var(--serif);letter-spacing:.06em}
+.pagehead .slogan{margin:14px 0 0;font:400 15px/1.9 var(--sans);color:var(--muted);max-width:26em}
+.profile{margin-top:30px}
+@media (max-width:760px){
+  body.home .main{padding-top:118px}
+  .pagehead .wrap{padding:0 16px}
+  .pagehead h1{font-size:38px}
+  .pagehead .slogan{font-size:14px;line-height:1.85}
+  .profile{margin-top:22px}
+}
