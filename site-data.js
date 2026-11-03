@@ -25,17 +25,17 @@ window.SITE = {
     "links": [
       {
         "label": "个人",
-        "href": "me/",
+        "href": "me/about.html",
         "icon": "about"
       },
       {
         "label": "作品",
-        "href": "",
+        "href": "me/work.html",
         "icon": "works"
       },
       {
         "label": "友链",
-        "href": "",
+        "href": "me/links.html",
         "icon": "link"
       }
     ],
