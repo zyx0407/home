@@ -10,10 +10,12 @@ The personal homepage of 阿玖 (`zyx0407`): a name card, a few subpages, and pe
 
 | Path | Content |
 | --- | --- |
-| `/` | Home: a flippable 3D name card (front cover / back design), three entry pills, rain |
-| `/about/` | About: a fish-mark illustration, four draggable notes, an envelope (open it to find a card) |
-| `/work/` | Work: one large card, switched left/right; more works just keep cycling |
-| `/notes/` | Notes: currently an empty shell, waiting for an idea |
+| `/` | Front card: a flippable 3D name card (front cover / back design), three entry pills; the tip line opens the tip QR |
+| `/me/` | Sub-site home: a short profile strip plus the latest post / work / link cards |
+| `/me/about.html` | About: all posts |
+| `/me/work.html` | Works: the skills library, student calendar |
+| `/me/links.html` | Links: request a link exchange |
+| `/404.html` | Not-found page |
 
 ## What's on the page
 
@@ -22,6 +24,14 @@ The personal homepage of 阿玖 (`zyx0407`): a name card, a few subpages, and pe
 - **Notes wall** — the four notes on the About page can be dragged around.
 - **Card sheet** — click the envelope or the name to open it: name, one line, and contact links (WeChat / email / GitHub).
 - **Fish mark** — the only illustration on the site: black by day, white at night.
+
+
+## Editing the sub-site
+
+- Pages live in `me/`: `index.html`, `about.html`, `work.html`, `links.html`.
+- A new post: copy `_写作模板/随笔.html` to `me/essays/<name>.html`, edit title/date/body, then add a card in `me/about.html` and `me/index.html`.
+- Card covers go to `me/assets/covers/`, 16:10, 1600px wide.
+- Read counts use a self-hosted endpoint: `data-views="slug"` on the card, `<body data-views-post="slug">` on the post; failures fall back to `—`.
 
 ## Where the content lives
 
