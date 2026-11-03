@@ -1160,3 +1160,11 @@ html[data-theme="night"] .topbar{
   .topbar .navwrap .nav{width:auto !important;order:0 !important;margin-left:0 !important;flex-wrap:nowrap !important}
   .topbar .navwrap .theme-btn{order:0 !important;margin:0 0 0 4px !important}
 }
+/* 顶栏 v8（2026-11-04 他「缩成和他的一样长」）：宽度对齐内容列，不再等宽整屏 */
+.topbar{
+  left:50%; right:auto; transform:translateX(-50%);
+  width:min(1040px, calc(100% - 56px)); max-width:none;
+}
+@media (max-width:760px){
+  .topbar{width:calc(100% - 24px); left:50%; transform:translateX(-50%)}
+}
