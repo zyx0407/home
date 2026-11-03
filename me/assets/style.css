@@ -1168,3 +1168,25 @@ html[data-theme="night"] .topbar{
 @media (max-width:760px){
   .topbar{width:calc(100% - 24px); left:50%; transform:translateX(-50%)}
 }
+/* 顶栏 v9（2026-11-04 他「你看人家的比例」）：按参考站实测放大——条更高、字更大、间隙更松 */
+.topbar{padding:14px 20px 14px 26px; border-radius:999px}
+.topbar .brand{font-size:18px}
+.topbar .navwrap .nav a{padding:8px 13px;font-size:13.5px;letter-spacing:.05em}
+.topbar .navwrap .theme-btn{width:34px;height:34px}
+.topbar .navwrap{gap:6px}
+@media (max-width:760px){
+  .topbar{padding:8px 12px 8px 16px}
+  .topbar .brand{font-size:16px}
+  .topbar .navwrap .nav a{padding:6px 8px;font-size:12px}
+  .topbar .navwrap .theme-btn{width:28px;height:28px}
+}
+/* 顶栏 v10（2026-11-04）：他比的是「条比内容窄一点」——实测参考站条 1180 而内容区 1300（各收 60），
+   我们内容 1040，条收到 940；同时上浮 18px 悬在纸面上 */
+.topbar{
+  width:min(940px, calc(100% - 48px));
+  top:18px;
+  padding:13px 18px 13px 24px;
+}
+@media (max-width:760px){
+  .topbar{width:calc(100% - 20px); top:10px}
+}
