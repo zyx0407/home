@@ -1217,3 +1217,13 @@ html[data-theme="night"] .topbar{
 .topbar .navwrap{padding:0 !important;margin-left:auto !important}
 .topbar .nav a.on{background:transparent !important;color:var(--ink);border-bottom:1px solid var(--amber)}
 .topbar .navwrap .theme-btn{background:transparent !important;border:0 !important;box-shadow:none !important}
+/* 顶栏 v15：夜版导航组还残留一层投影（html[data-theme=night] .nav 的 box-shadow），一并清掉 */
+.topbar .nav,
+html[data-theme="night"] .topbar .nav,
+.topbar .navwrap .nav{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+  border-radius:0 !important;
+}
