@@ -47,10 +47,9 @@
       <div>
         <p class="pname">阿玖</p>
         <div class="picons">
-          
-          <button type="button" class="picon" data-copy="ajiu_0407" title="微信：点一下复制 ajiu_0407" aria-label="复制微信号"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 4.6c-3.4 0-6.2 2.3-6.2 5.1 0 1.6.9 3 2.4 4l-.6 2.1 2.3-1.2c.7.2 1.4.3 2.1.3"/><path d="M15.4 9.6c3 0 5.5 2 5.5 4.6 0 1.4-.8 2.7-2.1 3.6l.5 1.9-2-1c-.6.2-1.2.3-1.9.3-3 0-5.5-2-5.5-4.6s2.5-4.8 5.5-4.8Z"/></svg></button>
-          <a class="picon" href="https://www.douyin.com/search/ajiu0407" target="_blank" rel="noopener" title="抖音 @ajiu0407" aria-label="抖音"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5v10.2a3.6 3.6 0 1 1-3-3.55"/><path d="M14 3.5c.4 2.4 1.9 3.9 4.3 4.2"/></svg></a>
-            <button type="button" class="picon" data-mail="1" title="邮箱：点一下复制地址" aria-label="邮箱"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="5.4" width="18.4" height="13.2" rx="2.4"/><path d="M3.6 7.2 12 13l8.4-5.8"/></svg></button>
+          <button type="button" class="picon" data-copy="ajiu_0407" data-label="微信号" title="微信：点一下复制" aria-label="复制微信号"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 4.6c-3.4 0-6.2 2.3-6.2 5.1 0 1.6.9 3 2.4 4l-.6 2.1 2.3-1.2c.7.2 1.4.3 2.1.3"/><path d="M15.4 9.6c3 0 5.5 2 5.5 4.6 0 1.4-.8 2.7-2.1 3.6l.5 1.9-2-1c-.6.2-1.2.3-1.9.3-3 0-5.5-2-5.5-4.6s2.5-4.8 5.5-4.8Z"/></svg></button>
+          <button type="button" class="picon" data-copy="ajiu0407" data-label="抖音号" title="抖音：点一下复制" aria-label="复制抖音号"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5v10.2a3.6 3.6 0 1 1-3-3.55"/><path d="M14 3.5c.4 2.4 1.9 3.9 4.3 4.2"/></svg></button>
+          <button type="button" class="picon" data-copy-mail="1" data-label="邮箱" title="邮箱：点一下复制" aria-label="复制邮箱"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="5.4" width="18.4" height="13.2" rx="2.4"/><path d="M3.6 7.2 12 13l8.4-5.8"/></svg></button>
           <a class="picon" href="https://github.com/zyx0407" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.3-4-2.2-6-2.6m12 5.6v-3.4c0-1 .1-1.4-.5-2 2.3-.3 4.5-1.2 4.5-5.2a4 4 0 0 0-1.1-2.8 3.7 3.7 0 0 0-.1-2.8s-1.2-.4-3.9 1.4a9.4 9.4 0 0 0-5 0C6.2 4.6 5 5 5 5a3.7 3.7 0 0 0-.1 2.8A4 4 0 0 0 3.8 10.6c0 4 2.2 4.9 4.5 5.2-.5.5-.5 1-.5 1.8V22"/></svg></a>
         </div>
         <p class="ptext">一个不断成长的个人开发者和他的小鱼，欢迎来到我的网站。</p>
@@ -137,40 +136,8 @@
   </div>
 </footer>
 
-<script src="assets/theme.js"></script>
-<script>
-/* 圆钮：微信点击复制 / 抖音待定提示 */
-(function () {
-  var tip = null, timer = 0;
-  function toast(msg) {
-    if (!tip) { tip = document.createElement('div'); tip.className = 'toast'; document.body.appendChild(tip); }
-    tip.textContent = msg; tip.classList.add('on');
-    clearTimeout(timer); timer = setTimeout(function () { tip.classList.remove('on'); }, 1800);
-  }
-  [].forEach.call(document.querySelectorAll('.picon'), function (el) {
-    el.addEventListener('click', function () {
-      var c = el.getAttribute('data-copy');
-      if (c) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(c).then(function () { toast('微信号已复制：' + c); },
-            function () { toast('微信号：' + c); });
-        } else { toast('微信号：' + c); }
-        return;
-      }
-      if (el.getAttribute('data-mail')) {
-        var addr = ['aj', 'zyx0407'].join('.') + '@' + ['qq', 'com'].join('.');
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(addr).then(function () { toast('邮箱已复制：' + addr); },
-            function () { toast('邮箱：' + addr); });
-        } else { toast('邮箱：' + addr); }
-        return;
-      }
-      var t = el.getAttribute('data-todo');
-      if (t) toast(t + ' 号还没给，回头补上');
-    });
-  });
-})();
-</script>  <script src="assets/雨.js"></script>
+<script src="assets/theme.js"></script>  <script src="assets/雨.js"></script>
   <script src="assets/views.js"></script>
+  <script src="assets/contacts.js"></script>
 </body>
 </html>
