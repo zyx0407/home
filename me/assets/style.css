@@ -1204,3 +1204,6 @@ html[data-theme="night"] .topbar{
 }
 /* 顶栏 v12：清掉 .row 继承来的上下两条 1px 线（他一直说的"里面的两横"） */
 .topbar .row{border-top:0 !important;border-bottom:0 !important;border-left:0 !important;border-right:0 !important}
+/* 顶栏 v13（2026-11-04 他点明：她右侧有栏所以顶栏比内容短；我们没侧栏，顶栏就该短于内容）：900 */
+.topbar{width:min(900px, calc(100% - 48px))}
+@media (max-width:760px){ .topbar{width:calc(100% - 20px)} }
