@@ -1202,3 +1202,5 @@ html[data-theme="night"] .topbar{
 @media (max-width:760px){
   .topbar{width:calc(100% - 20px)}
 }
+/* 顶栏 v12：清掉 .row 继承来的上下两条 1px 线（他一直说的"里面的两横"） */
+.topbar .row{border-top:0 !important;border-bottom:0 !important;border-left:0 !important;border-right:0 !important}
