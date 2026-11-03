@@ -216,6 +216,7 @@
         <div class="wire" id="wire"></div>
         <nav class="links" id="links"></nav>
         <p class="tip">觉得有意思？<b>请小鱼吃 token</b> ♡</p>
+        <button class="tip-qr" id="tipQrBtn" type="button" aria-label="赞赏码"><img src="assets/赞赏码.png" alt="赞赏码"><span>扫一扫</span></button>
         <p class="legal" id="legal"></p>
         <img class="corner-cat corner-cat-day" src="assets/困困猫-昼.png" alt="" aria-hidden="true" width="256" height="256"><img class="corner-cat corner-cat-night" src="assets/困困猫-夜.png" alt="" aria-hidden="true" width="256" height="256">
         <div class="card-shine" aria-hidden="true"></div>
@@ -520,6 +521,30 @@
   }
 
 
+</script>
+
+  <div class="qr-layer" id="qrLayer" hidden>
+    <div class="qr-box">
+      <img src="assets/赞赏码.png" alt="赞赏码">
+      <p>感谢投喂喵喵喵</p>
+      <button type="button" id="qrClose">关闭</button>
+    </div>
+  </div>
+
+<script>
+(function () {
+  var btn = document.getElementById('tipQrBtn');
+  var layer = document.getElementById('qrLayer');
+  var close = document.getElementById('qrClose');
+  if (!btn || !layer) return;
+  function show() { layer.hidden = false; }
+  function hide() { layer.hidden = true; }
+  btn.addEventListener('click', function (e) { e.stopPropagation(); show(); });
+  close.addEventListener('click', hide);
+  layer.addEventListener('click', function (e) { if (e.target === layer) hide(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+  if (new URLSearchParams(location.search).get('qr') === '1') show();
+})();
 </script>
 </body>
 </html>
