@@ -21,15 +21,13 @@ The personal homepage of 阿玖 (`zyx0407`): a name card, a few subpages, and pe
 
 - **Rain** — pencil strokes drawn on a canvas, layered under the content; ink colour follows the theme, never blocks clicks.
 - **3D name card** — drag in any direction to rotate, release to snap back to front or back; click to flip. The back holds a crescent, a QR code, the domain, ripples and a fish drawn in one stroke.
-- **Notes wall** — the four notes on the About page can be dragged around.
-- **Card sheet** — click the envelope or the name to open it: name, one line, and contact links (WeChat / email / GitHub).
 - **Fish mark** — the only illustration on the site: black by day, white at night.
 
 
 ## Editing the sub-site
 
 - Pages live in `me/`: `index.html`, `about.html`, `work.html`, `links.html`.
-- A new post: copy `_写作模板/随笔.html` to `me/essays/<name>.html`, edit title/date/body, then add a card in `me/about.html` and `me/index.html`.
+- A new post: copy `me/essays/who.html` to `me/essays/<name>.html`, edit title/date/body, then add a card in `me/about.html` and `me/index.html`.
 - Card covers go to `me/assets/covers/`, 16:10, 1600px wide.
 - Read counts use a self-hosted endpoint: `data-views="slug"` on the card, `<body data-views-post="slug">` on the post; failures fall back to `—`.
 
@@ -51,8 +49,6 @@ Two palettes: warm paper `#efeee9` by day, dark gallery `#0e0f11` at night. One 
 | `?nofade=1` | Skip the intro animation for stable frames in screenshots/automation |
 | `?rain=0` / `?rain=1` / `?rain=2` / `?rain=3` | Rain off / sparse / even (default) / dense |
 | `?flip=1` | Open the home name card with its back showing |
-| `?card=1` | Open the About page with the card sheet expanded |
-| `?i=N` | Land on the Nth work card |
 
 ## Deployment: GitHub Pages + custom domain
 
