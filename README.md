@@ -58,7 +58,7 @@
 ## 副页内容怎么改
 
 - 页面在 `me/`：`index.html`（首页）、`about.html`（个人 / 随笔列表）、`work.html`（作品）、`links.html`（友链）。
-- 一篇新随笔：复制 `me/essays/who.html` → 存成 `me/essays/<名字>.html` → 改标题、日期、正文 → 在 `me/about.html` 与 `me/index.html` 的随笔区各加一张卡。
+- 一篇新随笔：复制 `me/essays/who.html` → 存成 `me/essays/<名字>.html` → 改标题、日期、正文 → 在 `me/about.html` 与 `me/index.html` 的随笔区各加一张卡（**插在最前面：列表按日期倒序，最新在前**）。
 - 随笔卡片封面图放 `me/assets/covers/`，建议 16:10、宽 1600。
 - 阅读数走自建接口：卡片写 `data-views="slug"`，正文页 `<body data-views-post="slug">`；取不到就显示 `—`，不会把页面搞坏。
 - 顶栏品牌「阿玖」指向站点根（门面卡）。

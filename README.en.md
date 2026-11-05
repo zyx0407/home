@@ -27,7 +27,7 @@ The personal homepage of 阿玖 (`zyx0407`): a name card, a few subpages, and pe
 ## Editing the sub-site
 
 - Pages live in `me/`: `index.html`, `about.html`, `work.html`, `links.html`.
-- A new post: copy `me/essays/who.html` to `me/essays/<name>.html`, edit title/date/body, then add a card in `me/about.html` and `me/index.html`.
+- A new post: copy `me/essays/who.html` to `me/essays/<name>.html`, edit title/date/body, then add a card in `me/about.html` and `me/index.html` (**newest first: both lists are sorted by date, descending**).
 - Card covers go to `me/assets/covers/`, 16:10, 1600px wide.
 - Read counts use a self-hosted endpoint: `data-views="slug"` on the card, `<body data-views-post="slug">` on the post; failures fall back to `—`.
 
