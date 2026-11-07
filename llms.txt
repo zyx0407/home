@@ -1,0 +1,22 @@
+# 阿玖 · zyx0407
+
+> 在校学生、个人开发者；把想法做成真能跑起来的东西。这个站是纸色画廊风格的个人门面站。
+
+## 页面
+
+- [首页](https://zyx0407.com/)：一张居中卡片，三颗入口
+- [个人页与随笔](https://zyx0407.com/me/)
+- [个人](https://zyx0407.com/me/about.html)
+- [作品](https://zyx0407.com/me/work.html)
+- [友链](https://zyx0407.com/me/links.html)
+- [随笔《关于我》](https://zyx0407.com/me/essays/who.html)（2026-11-04）
+
+## 作品
+
+- [大学生日历](https://work1.zyx0407.com/)：22 项考试与证书的滚动 12 个月时间轴
+- [技能库](https://github.com/zyx0407/skills)：无头出图 + 纸色架构图
+- [软著申请材料生成器](https://github.com/zyx0407/soft-copyright-docs)
+
+## 联系
+
+- GitHub：https://github.com/zyx0407

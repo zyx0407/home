@@ -1,0 +1,6 @@
+# 阿玖 · zyx0407
+# 搜索引擎与 AI 抓取都欢迎；站点内容全部静态可读。
+User-agent: *
+Allow: /
+
+Sitemap: https://zyx0407.com/sitemap.xml
