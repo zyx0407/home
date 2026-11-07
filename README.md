@@ -11,10 +11,10 @@
 | 路径 | 内容 |
 | --- | --- |
 | `/` | 门面：一张可翻转的 3D 名片卡（正面门面、背面卡背），三颗入口胶囊，投喂语点开是赞赏码 |
-| `/me/` | 副页首页：自我介绍条、最新随笔 / 作品 / 友链三块卡片 |
+| `/me/` | 副页首页：自我介绍条、最新随笔 / 作品 / 链接三块卡片 |
 | `/me/about.html` | 个人：全部随笔 |
 | `/me/work.html` | 作品：技能库、大学生日历 |
-| `/me/links.html` | 友链：可以申请交换链接 |
+| `/me/links.html` | 链接：可以申请交换链接 |
 | `/404.html` | 找不到页面时的兜底页 |
 
 语言：中文（`README.en.md` 为英文版）。站点为纯静态，可直接 `index.html` 双击查看，也可放 GitHub Pages。
@@ -57,7 +57,7 @@
 
 ## 副页内容怎么改
 
-- 页面在 `me/`：`index.html`（首页）、`about.html`（个人 / 随笔列表）、`work.html`（作品）、`links.html`（友链）。
+- 页面在 `me/`：`index.html`（首页）、`about.html`（个人 / 随笔列表）、`work.html`（作品）、`links.html`（链接）。
 - 一篇新随笔：复制 `me/essays/who.html` → 存成 `me/essays/<名字>.html` → 改标题、日期、正文 → 在 `me/about.html` 与 `me/index.html` 的随笔区各加一张卡（**插在最前面：列表按日期倒序，最新在前**）。
 - 随笔卡片封面图放 `me/assets/covers/`，建议 16:10、宽 1600。
 - 阅读数走自建接口：卡片写 `data-views="slug"`，正文页 `<body data-views-post="slug">`；取不到就显示 `—`，不会把页面搞坏。

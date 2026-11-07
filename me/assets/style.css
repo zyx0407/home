@@ -1271,7 +1271,7 @@ html{background:var(--bg)}
 /* 阅读数（2026-11-04 接自建接口；取不到就显示 —，不打断页面） */
 .vn{font:400 11.5px/1 var(--mono);letter-spacing:.04em;color:var(--muted);font-style:normal}
 .prose .pdate .vsep{margin:0 8px;opacity:.5}
-/* 友链空态（2026-11-04 页重构） */
+/* 链接空态（2026-11-04 页重构） */
 .empty-note{padding:26px 0 10px;max-width:34em}
 .empty-note p{margin:0 0 10px;font:400 15px/1.9 var(--sans);color:var(--muted)}
 .empty-note .hint{font:italic 12.5px/1.8 var(--note);color:var(--muted);opacity:.8}
@@ -1306,12 +1306,12 @@ html{background:var(--bg)}
 @media (max-width:760px){
   .rowlink{grid-template-areas:"date date" "title arrow" "desc desc";row-gap:4px}
 }
-/* 友链申请块（2026-11-04） */
+/* 链接申请块（2026-11-04） */
 .apply{padding:26px 0 6px;max-width:36em}
 .apply p{margin:0 0 10px;font:400 15px/1.9 var(--sans);color:var(--ink)}
 .apply .apply-sub{margin:0 0 18px;font:400 13px/1.8 var(--sans);color:var(--muted)}
 .apply-icons{margin:0}
-/* 提示条（2026-11-04）：友链这类"还没内容"的位置不用卡片，用一条提示 */
+/* 提示条（2026-11-04）：链接这类"还没内容"的位置不用卡片，用一条提示 */
 .hintbox{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   margin:2px 0 0;padding:18px 20px;border:1px solid var(--line);border-radius:14px;

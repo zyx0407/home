@@ -8,7 +8,7 @@
 - [个人页与随笔](https://zyx0407.com/me/)
 - [个人](https://zyx0407.com/me/about.html)
 - [作品](https://zyx0407.com/me/work.html)
-- [友链](https://zyx0407.com/me/links.html)
+- [链接](https://zyx0407.com/me/links.html)
 - [随笔《关于我》](https://zyx0407.com/me/essays/who.html)（2026-11-04）
 
 ## 作品

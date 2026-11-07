@@ -83,7 +83,7 @@ try {
     const text = stripText(dom);
     const bytes = Buffer.byteLength(dom);
     console.log(`· ${page.file}  静态正文 ${text.length} 字  ${(bytes / 1024).toFixed(1)}KB`);
-    const must = [['鱼标', /class="yu-svg"/], ['三个入口', /(个人|作品|友链)/], ['备案号', /豫ICP备/]];
+    const must = [['鱼标', /class="yu-svg"/], ['三个入口', /(个人|作品|链接)/], ['备案号', /豫ICP备/]];
     const missing = must.filter(([, re]) => !re.test(dom)).map(([n]) => n);
     if (text.length < 250 || missing.length) {
       console.error('✗ 静态内容不完整：字数', text.length, '缺', missing.join('、') || '无');

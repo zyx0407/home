@@ -34,7 +34,7 @@ window.SITE = {
         "icon": "works"
       },
       {
-        "label": "友链",
+        "label": "链接",
         "href": "me/links.html",
         "icon": "link"
       }
